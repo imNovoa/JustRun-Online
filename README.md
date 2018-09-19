@@ -1,4 +1,4 @@
-# JustRun-Online
+# RACE.io
 
  Nombre del juego.
 • Descripción de la temática del juego.
