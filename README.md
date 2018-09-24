@@ -95,6 +95,8 @@ Resistencia: 3/5
 
 Bocetos de los personajes: 
 
+!(https://imgur.com/a/6eyb7P5)
+
 **NIVELES** 
 
 Dentro del modo historia existirán cuatro niveles diferentes con una temática y un diseño bien definidos. 
