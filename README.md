@@ -95,9 +95,6 @@ Resistencia: 3/5
 
 Bocetos de los personajes: 
 
-![GitHub Logo](/images/BocetosDani.jpg)
-Format: ![Alt Text](url)
-
 **NIVELES** 
 
 Dentro del modo historia existirán cuatro niveles diferentes con una temática y un diseño bien definidos. 
