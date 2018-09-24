@@ -96,6 +96,7 @@ Resistencia: 3/5
 Bocetos de los personajes: 
 
 ![](https://i.imgur.com/uIMrvmq.jpg)
+![](https://i.imgur.com/1dJx4Hk.jpg)
 
 **NIVELES** 
 
