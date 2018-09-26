@@ -65,8 +65,6 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 * Menú centrado con respecto a los bordes superiores y laterales en el que se pueden realizar las siguientes acciones: 
 
-* Elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. 
-
 * Crear partida: crea una partida desde cero, y te permite elegir un mapa. Dirige a (2) 
 
 * Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
@@ -96,6 +94,9 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 * Debajo de los ejemplos, tendremos una pequeña descripción del personaje y de su habilidad. 
 
 * Debajo de la descripción, encontramos un botón “¡Listo!”, con el que se indica que el jugador está preparado. (Los cuatro jugadores deben estar listos para que la partida comience. En caso contrario, habrá un contador de 30 segundos que, cuando finalice, provocará el comienzo de partida de manera incondicional. 
+
+* Adicionalmente, tendremos un botón para elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. Si no se escribe nada, se asignará uno por defecto.
+
  
 **PERSONAJES**
 
