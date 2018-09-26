@@ -70,7 +70,7 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
     - Crear partida: crea una partida desde cero, y te permite elegir un mapa. Dirige a (2) 
 
-    - Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
+    - Buscar partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
 
 * Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
 * Simbolo de interrogante, que saca una ventana con los controles. Dirige a (6).
