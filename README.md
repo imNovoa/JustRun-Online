@@ -73,8 +73,9 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
       - Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
 
 * Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
+* Simbolo de interrogante, que saca una ventana con los controles. Dirige a (6).
 
-![](https://i.imgur.com/41DQPnu.jpg)
+![](https://i.imgur.com/aUGARoC.jpg)
 
 (2) Crear Partida: 
 
@@ -83,6 +84,8 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 * Botón “Crear” con el cual crear la partida y que empiece a buscar jugadores. Dirige a (4) 
 
 * Círculo en la parte superior derecha de la pantalla con un aspa, que te permite volver a la pantalla (1) 
+
+![](https://i.imgur.com/QAy6667.jpg)
 
 (3) Unirse a Partida: 
 
@@ -100,8 +103,31 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 * Debajo de la descripción, encontramos un botón “¡Listo!”, con el que se indica que el jugador está preparado. (Los cuatro jugadores deben estar listos para que la partida comience. En caso contrario, habrá un contador de 30 segundos que, cuando finalice, provocará el comienzo de partida de manera incondicional. 
 
-* Adicionalmente, tendremos un botón para elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. Si no se escribe nada, se asignará uno por defecto.
+* Adicionalmente, tendremos un botón para elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. Si no se escribe nada, se asignará el nombre que tienen los personajes por defecto.
 
+![](https://i.imgur.com/qIv4XPC.jpg)
+
+(5) Partida terminada:
+
+* Lista centrada con los jugadores y su orden de finalización de carrera. El jugador que quede encima del todo tendrá adornos adicionales, ya que ha ganado el juego. Despues de un tiempo de 30 segundos, se vuelve al estado (4) con los mismos jugadores.
+
+* Como fondo, tendremos una imagen del mismo mapa con scroll lento a la derecha.
+
+* Botón de "Continuar". Si todos los jugadores lo pulsan, se omite el tiempo de espera.
+
+* Botón circular con aspa que redigirá a la pantalla (1)
+
+![](https://i.imgur.com/dVvJorB.jpg)
+
+(6) Controles:
+
+* Ventana emergente sobrepuesta a (1) que muestra los controles de juego. No se muestra aquí porque los controles aún no son definitivos. Independientemente del resultado final, se mostrarán las diferentes teclas que el juego usa y describe las acciones de cada uno.
+
+Cabe destacar que durante el juego no se podrá acceder a ninguna interfaz de pausa, ya que el juego es multijugador. Si el jugador quiere salir del juego deberá hacerlo desde la pantalla (5) o si está dentro de la partida, cerrando la pestaña del navegador, lo que indicará su desconexión.
+
+Para un mayor detalle de todo esto, mostramos el correspondiente diagrama UML. La versión local solo se utilizará a modo de prueba para los desarrolladores, por lo que no se ha incluido en las descripciones anteriores.
+
+![](https://i.imgur.com/gsPP9Sp.jpg)
  
 **PERSONAJES**
 
@@ -109,40 +135,20 @@ El juego consta de cuatro diferentes personajes, dos masculinos y dos femeninos.
 
 * Evelin : Impulsiva, maniática, alegre pero con un retorcido sentido del humor. Ama las cosas brillantes. Roba objetos de los museos porque relucen. A pesar de que a primera vista parezca negada para el trabajo, es muy capaz. Logra superar sus obstáculos como si lo hiciera sin querer, siendo torpe pero efectiva. Delgada, ojos grandes, cabello pelirrojo enmarañado. Se flipa MUCHISIMO. 
 
-Velocidad: 3/5 
-
-Salto: 5/5 
-
-Resistencia: 2/5 
-
 * Francesca :  Elegante, misteriosa, sofisticada. Con una ambición desmedida. Solo roba objetos por el riesgo que conlleva. Muy atlética, cabello negro, bella, sigilosa. Ha estado varias veces en la carcel pero siempre consigue escapar. Sabe correr con TACONES. Tiene un montón de artilugios chulos para entrar en los museos.  
 
-Velocidad: 5/5 
-
-Salto: 2/5 
-
-Resistencia: 3/5 
+![](https://i.imgur.com/1dJx4Hk.jpg)
 
 * Gray: Un auténtico lobo de mar. De edad adulta, con barba gris, de facciones duras y cuerpo grueso pero fuerte. Considerado a sí mismo un pirata de la edad moderna, se dedica a robar los objetos históricos al puro estilo pirata. Armado hasta los dientes. Silencioso y reflexivo. De sensibilidad muy desarrollada. Ama mirar la luna mientras escucha Fly me to the moon en la cubierta de su barco “Bessy”. 
 
-Velocidad: 2/5 
-
-Salto: 3/5 
-
-Resistencia: 5/5 
+![](https://i.imgur.com/yCrlgxU.jpg)
 
 * Frank Drake: Aventurero experto ladrón de tumbas y objetos raros para llenar un vacío existencial que solo puede llenar poniendo su vida en peligro. Siempre pone en peligro a los demás. Solo estuvo capturado otra vez antes de esta, en una cárcel panameña. De cuerpo atlético, joven (30 años), guapo.  
 
-Velocidad: 3/5 
-
-Salto: 4/5 
-
-Resistencia: 3/5 
-
-Bocetos de los personajes: 
+Visión general de estética: 
 
 ![](https://i.imgur.com/uIMrvmq.jpg)
-![](https://i.imgur.com/1dJx4Hk.jpg)
+
 
 **NIVELES** 
 
