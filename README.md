@@ -57,7 +57,9 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 * Título del juego con tipografía personalizada 
 
-* Botón de “Play” que permite acceder a la siguiente pantalla (1). 
+* Botón de “Play” que permite acceder a la siguiente pantalla (1).
+
+![](https://i.imgur.com/RRCziVY.jpg)
 
 (1) Menú principal: 
 
@@ -70,6 +72,8 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
       2) Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
 
 * Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
+
+![](https://i.imgur.com/41DQPnu.jpg)
 
 (2) Crear Partida: 
 
