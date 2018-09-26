@@ -108,6 +108,8 @@ Los niveles compartirán el mismo patrón de diseño. La zona media será consid
 El resto de los niveles estarán centrados en una temática concreta, que será coherente respecto a la pequeña historia que queremos contar con el videojuego. 
 
 Las distintas temáticas serán: Cárcel (Primer nivel) Egipto, Grecia, París, Japón, Roma, Museo de Londres (nivel final donde está la joya). 
+![](https://i.imgur.com/Fh8vnD0.jpg)
+![](https://i.imgur.com/NsH30Qf.jpg)
 
 **HABILIDADES** 
 
