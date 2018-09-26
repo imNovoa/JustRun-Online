@@ -51,11 +51,51 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 **INTERFACES** 
 
-Menú principal en el que se puede cambiar el nombre del jugador, crear grupo de amigos y seleccionar el modo (historia, libre y campeonato). 
+(0) Pantalla inicial: 
 
-Existe una pantalla de selección de personaje en los modos historia y campeonato. A parte de otro menú de votación de mapas.  
+* Ilustración de los cuatro protagonistas escapando de la cárcel con un plano contrapicado (no muy exagerado) y el foco de un helicóptero en la parte superior 
 
-Menú de modificación de aspectos (pantalla, sonido...) pero no pausa. 
+* Título del juego con tipografía personalizada 
+
+* Botón de “Play” que permite acceder a la siguiente pantalla (1). 
+
+(1) Menú principal: 
+
+* Pantalla que tiene como fondo un ejemplo estático de un nivel (cárcel) 
+
+* Menú centrado con respecto a los bordes superiores y laterales en el que se pueden realizar las siguientes acciones: 
+
+* Elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. 
+
+* Crear partida: crea una partida desde cero, y te permite elegir un mapa. Dirige a (2) 
+
+* Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
+
+* Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
+
+(2) Crear Partida: 
+
+* Imagen ejemplo del mapa que se esté seleccionando en ese momento, centrado con respecto a los bordes superiores y levemente movido a la parte superior. Debajo de dicha imagen, dos flechas “(<    >)” que permiten cambiar el mapa seleccionado. 
+
+* Botón “Crear” con el cual crear la partida y que empiece a buscar jugadores. Dirige a (4) 
+
+* Círculo en la parte superior derecha de la pantalla con un aspa, que te permite volver a la pantalla (1) 
+
+(3) Unirse a Partida: 
+
+* Lista con diferentes partidas y descripción de las mismas. (No queda completamente definido por la carencia de online hasta la tercera fase. Indiferentemente, dirigirá a (4)). 
+
+(4) Elección del personaje: 
+
+* En la parte izquierda, una tarjeta con un concept del personaje, concretamente su pedazo correspondiente a la imagen del menú (0). 
+
+* En la parte derecha tendremos: 
+
+* En la parte superior de esta parte, tendremos dos ejemplos de jugabilidad del personaje que podrán alternarse con dos botones “(<    >)”. Estos ejemplos serán la jugabilidad del personaje con su apariencia normal y la segunda del mismo personaje haciendo uso de su habilidad. 
+
+* Debajo de los ejemplos, tendremos una pequeña descripción del personaje y de su habilidad. 
+
+* Debajo de la descripción, encontramos un botón “¡Listo!”, con el que se indica que el jugador está preparado. (Los cuatro jugadores deben estar listos para que la partida comience. En caso contrario, habrá un contador de 30 segundos que, cuando finalice, provocará el comienzo de partida de manera incondicional. 
  
 **PERSONAJES**
 
