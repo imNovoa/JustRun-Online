@@ -14,7 +14,7 @@ cuenta en GitHub.
 
 * Plataforma: Pc, Navegador. 
 
-* Sinopsis de Jugabilidad y contenido: juego multijugador en 2D en el que hasta cuatro jugadores deben llegar al final de un escenario (Scroll lateral) antes que ninguno de los otros. En el mapa nos encontraremos con objetos con los que entorpecer a los adversarios, diversos atajos y obstáculos que nos dificultaran para llegar a nuestro objetivo. Caer en una gran cantidad de obstáculos provocará que un enemigo que nos estará persiguiendo nos haga perder la partida y sacarnos de la carrera. Los mapas tendrán un diseño concreto y no se dejará nada al azar. El estilo visual será simple pero vistoso. Existirán distintos niveles diferenciados entre sí por temáticas y la disposición de sus elementos. Cada personaje seleccionable tendrá habilidades determinadas. 
+* Sinopsis de Jugabilidad y contenido: juego multijugador en 2D en el que hasta cuatro jugadores deben llegar al final de un escenario (Scroll lateral) antes que ninguno de los otros. En el mapa nos encontraremos con objetos con los que entorpecer a los adversarios, diversos atajos y obstáculos que nos dificultaran para llegar a nuestro objetivo. Los mapas tendrán un diseño concreto y no se dejará nada al azar. El estilo visual será simple pero vistoso. Existirán distintos niveles diferenciados entre sí por temáticas y la disposición de sus elementos. Cada personaje seleccionable tendrá habilidades determinadas. 
 
 * Categoría: Plataformas, Carreras, Multijugador. 
 
@@ -40,17 +40,7 @@ La intención del juego es crear mecánicas simples pero que resulten entretenid
 
 * Puntuación: No se guarda ningún tipo de puntuación durante la partida. El objetivo del juego es quedar en la mejor posición posible al final de la carrera. 
 
-**ESTADOS DEL JUEGO**
-
-El jugador empieza en el menú principal en el cual existen distintas opciones, historia, libre o campeonato. A parte tiene la opción de jugar con amigos, añadiéndose todos a un grupo de hasta 4 jugadores los cuales pueden elegir cualquiera de los 3 modos. El que elegirá el modo será el admin del grupo.  
-
-El modo historia consta de una pequeña campaña multijugador la cual comenzará cuando se encuentren 4 jugadores online. Al hacerlo saltará una cinemática introductoria para presentar a nuestros 4 personajes principales y la situación en la que se encuentran (esta cinemática podrá ser saltada si todos y cada uno de los jugadores acceden a ello dándole al botón space durante 3 segundos). Después los jugadores podrán elegir al personaje que quieren representar y empezará el modo historia basado en un mapa introductorio (escape de la cárcel) y 3 mapas más que serán distintas localizaciones alrededor del mundo (aleatorias en cada partida) (todas ellas elegidas por su valor histórico ya que todo el juego gira alrededor de la búsqueda de objetos históricos ancestrales). En cada uno de los mapas siguientes, el que quede último será ‘capturado por la policía’ (eliminado de la partida) hasta que solo queden 2 en la última ronda, en la cual deberán conseguir la preciada joya buscada.  
-
-El modo libre te mete en una partida con un personaje aleatorio en un mapa aleatorio también solo a una ronda. Sirve más como entrenamiento o para pasar el tiempo.  
-
-En campeonato, los jugadores eligen al personaje que quieran, seleccionan el número de rondas y los mapas que quieren jugar a votación. 
-
-**INTERFACES** 
+**ESTADOS DEL JUEGO | INTERFACES**
 
 (0) Pantalla inicial: 
 
@@ -97,7 +87,9 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 * En la parte derecha tendremos: 
 
-   - En la parte superior de esta parte, tendremos dos ejemplos de jugabilidad del personaje que podrán alternarse con dos botones “(<    >)”. Estos ejemplos serán la jugabilidad del personaje con su apariencia normal y la segunda del mismo personaje haciendo uso de su habilidad. 
+   - En la parte superior de esta parte, tendremos el nombre del personaje con flechas “(<    >)” que alternarán entre los cuatro diferentes personajes jugables.
+   
+   - Debajo del nombre, tendremos dos ejemplos de jugabilidad del personaje que podrán alternarse con dos botones “(<    >)”. Estos ejemplos serán la jugabilidad del personaje con su apariencia normal y la segunda del mismo personaje haciendo uso de su habilidad. 
 
    - Debajo de los ejemplos, tendremos una pequeña descripción del personaje y de su habilidad. 
 
@@ -105,7 +97,7 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
    - Adicionalmente, tendremos un botón para elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. Si no se escribe nada, se asignará el nombre que tienen los personajes por defecto.
 
-![](https://i.imgur.com/qIv4XPC.jpg)
+![](https://i.imgur.com/mwy0308.jpg)
 
 (5) Partida terminada:
 
@@ -122,6 +114,8 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 (6) Controles:
 
 * Ventana emergente sobrepuesta a (1) que muestra los controles de juego. No se muestra aquí porque los controles aún no son definitivos. Independientemente del resultado final, se mostrarán las diferentes teclas que el juego usa y describe las acciones de cada uno.
+
+* De forma adicional, se podrá acceder a una ventana similar a (4) mediante un botón "Personajes", para poder ver con detenimiento las caracteristicas de los personajes jugables. Esta venana (4)* no contará con la asignación de un Nickname ni con el botón "¡Listo!".
 
 Cabe destacar que durante el juego no se podrá acceder a ninguna interfaz de pausa, ya que el juego es multijugador. Si el jugador quiere salir del juego deberá hacerlo desde la pantalla (5) o si está dentro de la partida, cerrando la pestaña del navegador, lo que indicará su desconexión.
 
@@ -149,7 +143,6 @@ Visión general de estética:
 
 ![](https://i.imgur.com/1dJx4Hk.jpg)
 
-
 **NIVELES** 
 
 Dentro del modo historia existirán cuatro niveles diferentes con una temática y un diseño bien definidos. 
@@ -169,13 +162,13 @@ Cada uno de los cuatro personajes tiene una habilidad única que podrá utilizar
 
 Las habilidades a las que el jugador podrá optar son las siguientes: 
 
-* Teletransportación: permite al jugador desplazarse hacia delante instantáneamente en cualquier momento que deseé, reduciendo el riesgo de chocar con obstáculos.  Esto otorga una jugabilidad mucho más dinámica y mayor libertad de movimiento. Tiene una duración de 10 segundos.  
+* Teletransportación: permite al jugador desplazarse hacia delante instantáneamente en cualquier momento que deseé, reduciendo el riesgo de chocar con obstáculos.  Esto otorga una jugabilidad mucho más dinámica y mayor libertad de movimiento. Tiene una duración de 10 segundos. Este es el poder de **Evelin**
 
-* Forma fantasmal: el jugador se vuelve completamente invulnerable a todos los obstáculos y trampas y ataques de otros jugadores durante un periodo de tiempo de 5 segundos.  
+* Forma fantasmal: el jugador se vuelve completamente invulnerable a todos los obstáculos y trampas y ataques de otros jugadores durante un periodo de tiempo de 5 segundos. Este es el poder de **Gray**
 
-* Super velocidad: el jugador podrá realizar un sprint que tendrá una duración de 5 segundos. No tendrá invulnerabilidad, asique es una habilidad que tiene un gran riesgo. Si se toca a otro jugador mientras se realiza el sprint, este sufrirá una caída y su velocidad se reducirá por completo. También deja una estela de fuego de manera momentánea que ralentiza a los jugadores que pasen por ella. 
+* Super velocidad: el jugador podrá realizar un sprint que tendrá una duración de 5 segundos. No tendrá invulnerabilidad, asique es una habilidad que tiene un gran riesgo. Si se toca a otro jugador mientras se realiza el sprint, este sufrirá una caída y su velocidad se reducirá por completo. También deja una estela de fuego de manera momentánea que ralentiza a los jugadores que pasen por ella. Este es el poder de **Francesca**
 
-* Forma demoniaca: el jugador se transformará en un demonio capaz de lanzar bolas de fuego ilimitadas de manera bidireccional y que podrán dañar a otros jugadores reduciendo por completo su velocidad. No es invulnerable a los ataques de los jugadores, trampas u obstáculos.  
+* Forma demoniaca: el jugador se transformará en un demonio capaz de lanzar bolas de fuego ilimitadas de manera bidireccional y que podrán dañar a otros jugadores reduciendo por completo su velocidad. No es invulnerable a los ataques de los jugadores, trampas u obstáculos. Este es el poder de **Frank Drake**
 
 **ARMAS** 
 
