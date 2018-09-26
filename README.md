@@ -4,6 +4,7 @@ cuenta en GitHub.
  - Iván Murcia Esteban, i.murcia.2016@alumnos.urjc.es, IvanMurciaEsteban
  - Daniel Jimenez Vela, d.jimenez.2016@alumnos.urjc.es
  - Miguel Ángel Novoa Vega, ma.novoa.2016@alumnos.urjc.es, imNovoa
+ - Juan Jesus Segovia Sarmiento, jj.segovia.2016@alumnos.urjc.es
  
 **DOCUMENTO DE DISEÑO**
 
