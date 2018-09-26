@@ -68,9 +68,9 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 * Menú centrado con respecto a los bordes superiores y laterales en el que se pueden realizar las siguientes acciones: 
 
-      - Crear partida: crea una partida desde cero, y te permite elegir un mapa. Dirige a (2) 
+    - Crear partida: crea una partida desde cero, y te permite elegir un mapa. Dirige a (2) 
 
-      - Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
+    - Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
 
 * Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
 * Simbolo de interrogante, que saca una ventana con los controles. Dirige a (6).
@@ -137,7 +137,7 @@ El juego consta de cuatro diferentes personajes, dos masculinos y dos femeninos.
 
 * Francesca :  Elegante, misteriosa, sofisticada. Con una ambición desmedida. Solo roba objetos por el riesgo que conlleva. Muy atlética, cabello negro, bella, sigilosa. Ha estado varias veces en la carcel pero siempre consigue escapar. Sabe correr con TACONES. Tiene un montón de artilugios chulos para entrar en los museos.  
 
-![](https://i.imgur.com/1dJx4Hk.jpg)
+![](https://i.imgur.com/uIMrvmq.jpg)
 
 * Gray: Un auténtico lobo de mar. De edad adulta, con barba gris, de facciones duras y cuerpo grueso pero fuerte. Considerado a sí mismo un pirata de la edad moderna, se dedica a robar los objetos históricos al puro estilo pirata. Armado hasta los dientes. Silencioso y reflexivo. De sensibilidad muy desarrollada. Ama mirar la luna mientras escucha Fly me to the moon en la cubierta de su barco “Bessy”. 
 
@@ -147,7 +147,7 @@ El juego consta de cuatro diferentes personajes, dos masculinos y dos femeninos.
 
 Visión general de estética: 
 
-![](https://i.imgur.com/uIMrvmq.jpg)
+![](https://i.imgur.com/1dJx4Hk.jpg)
 
 
 **NIVELES** 
