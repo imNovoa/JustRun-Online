@@ -97,13 +97,13 @@ En campeonato, los jugadores eligen al personaje que quieran, seleccionan el nú
 
 * En la parte derecha tendremos: 
 
-* En la parte superior de esta parte, tendremos dos ejemplos de jugabilidad del personaje que podrán alternarse con dos botones “(<    >)”. Estos ejemplos serán la jugabilidad del personaje con su apariencia normal y la segunda del mismo personaje haciendo uso de su habilidad. 
+   - En la parte superior de esta parte, tendremos dos ejemplos de jugabilidad del personaje que podrán alternarse con dos botones “(<    >)”. Estos ejemplos serán la jugabilidad del personaje con su apariencia normal y la segunda del mismo personaje haciendo uso de su habilidad. 
 
-* Debajo de los ejemplos, tendremos una pequeña descripción del personaje y de su habilidad. 
+   - Debajo de los ejemplos, tendremos una pequeña descripción del personaje y de su habilidad. 
 
-* Debajo de la descripción, encontramos un botón “¡Listo!”, con el que se indica que el jugador está preparado. (Los cuatro jugadores deben estar listos para que la partida comience. En caso contrario, habrá un contador de 30 segundos que, cuando finalice, provocará el comienzo de partida de manera incondicional. 
+   - Debajo de la descripción, encontramos un botón “¡Listo!”, con el que se indica que el jugador está preparado. (Los cuatro jugadores deben estar listos para que la partida comience. En caso contrario, habrá un contador de 30 segundos que, cuando finalice, provocará el comienzo de partida de manera incondicional. 
 
-* Adicionalmente, tendremos un botón para elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. Si no se escribe nada, se asignará el nombre que tienen los personajes por defecto.
+   - Adicionalmente, tendremos un botón para elegir nombre para el jugador (nickname): asigna un nombre que estará presente durante todas las partidas. Si no se escribe nada, se asignará el nombre que tienen los personajes por defecto.
 
 ![](https://i.imgur.com/qIv4XPC.jpg)
 
