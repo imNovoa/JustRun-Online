@@ -8,7 +8,7 @@ cuenta en GitHub.
  
 **DOCUMENTO DE DISEÑO**
 
-* Título: Por determinar. (run) 
+* Título: Por determinar. (Racing Thieves) 
 
 * Estudio: Dertien Studio. 
 
