@@ -1,4 +1,4 @@
-# race.io
+# Racing Thieves
 • Integrantes del equipo de desarrollo: Nombre, Apellidos, correo oficial de la universidad y
 cuenta en GitHub.
  - Iván Murcia Esteban, i.murcia.2016@alumnos.urjc.es, IvanMurciaEsteban
