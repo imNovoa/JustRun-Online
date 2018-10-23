@@ -3,7 +3,6 @@ CatCatcher.arcadeState = function(game) {
 }
 
 var player;
-//var facing = 'left';
 var jumpTimer = 0;
 var cursors;
 var ballButton;
@@ -65,6 +64,8 @@ function p2jump() {
     }
 }
 
+
+//Eventos de colisiones
 function collisionHandler(ball, layer) {
     ball.kill();
 }
@@ -84,6 +85,8 @@ function ballvsball() {
     ball.kill();
 }
 
+
+//bolas de fuego
 function fireball(p) {
     if (game.time.now > ballTime) {
         ball = balls.getFirstExists(false);
@@ -122,10 +125,7 @@ function fireball2(p) {
     }
 }
 
-function removeSprite(sprite) {
-    sprite.destroy();
-}
-
+//funciones para manejar la ralentización del jugador
 function slowFalse() {
     player.slow = false;
 }
@@ -178,6 +178,7 @@ CatCatcher.arcadeState.prototype = {
 
         game.physics.arcade.gravity.y = 300;
 
+        //Bolas de fuego del jugador 1
         balls = game.add.group();
         balls.enableBody = true;
         balls.physicsBodyType = Phaser.Physics.ARCADE;
@@ -185,6 +186,7 @@ CatCatcher.arcadeState.prototype = {
         balls.setAll('outOfBoundsKill', true);
         balls.setAll('checkWorldBounds', true);
 
+        //Bolas de fuego del jugador 2
         balls2 = game.add.group();
         balls2.enableBody = true;
         balls2.physicsBodyType = Phaser.Physics.ARCADE;
@@ -196,31 +198,30 @@ CatCatcher.arcadeState.prototype = {
         //JUGADOR 1
         player = game.add.sprite(32, 320, 'dude');
         game.physics.enable(player, Phaser.Physics.ARCADE);
-        //JUGADOR 2
-        player2 = game.add.sprite(60, 320, 'dude');
-        game.physics.enable(player2, Phaser.Physics.ARCADE);
-
-        //ball = game.add.sprite(9999, 9999, 'fireball');
-        //game.physics.enable(ball, Phaser.Physics.ARCADE);
-
         player.body.collideWorldBounds = true;
         player.body.gravity.y = 1000;
         player.body.maxVelocity.y = 500;
         player.body.setSize(20, 32, 5, 16);
 
+        //animaciones
+        player.animations.add('left', [0, 1, 2, 3], 10, true);
+        player.animations.add('turn', [4], 20, true);
+        player.animations.add('right', [5, 6, 7, 8], 10, true);
+
+        //JUGADOR 2
+        player2 = game.add.sprite(60, 320, 'dude');
+        game.physics.enable(player2, Phaser.Physics.ARCADE);
         player2.body.collideWorldBounds = true;
         player2.body.gravity.y = 1000;
         player2.body.maxVelocity.y = 500;
         player2.body.setSize(20, 32, 5, 16);
 
-
-        player.animations.add('left', [0, 1, 2, 3], 10, true);
-        player.animations.add('turn', [4], 20, true);
-        player.animations.add('right', [5, 6, 7, 8], 10, true);
-
+        //animaciones
         player2.animations.add('left', [0, 1, 2, 3], 10, true);
         player2.animations.add('turn', [4], 20, true);
         player2.animations.add('right', [5, 6, 7, 8], 10, true);
+
+        //Controles
 
         cursors = game.input.keyboard.createCursorKeys();
         ballButton = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
@@ -234,6 +235,8 @@ CatCatcher.arcadeState.prototype = {
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
+
+        //Otras propiedades del jugador
         player.jumpCount = 0;
         player2.jumpCount = 0;
 
@@ -316,25 +319,22 @@ box.fixedToCamera = true;
 
     update: function () {
 
+        //Activamos colisiones de los jugadores con el mundo
         game.physics.arcade.collide(player, layer);
         game.physics.arcade.collide(player2, layer);
 
-        //game.physics.arcade.collide(ball, layer);
-
         //barWidth = healthBar.width;
         //healthBar.width = barWidth - barWidth/POWER;
-   
 
-
+        //velocidad de los jugadores a 0
         player.body.velocity.x = 0;
         player2.body.velocity.x = 0;
 
-
+        //Controles jugador 1
         if (cursors.left.isDown) {
             if (player.slow == false) {
                 player.body.velocity.x = -150;
             } else {
-                game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse, this);
                 player.body.velocity.x = -75;
             }
 
@@ -346,8 +346,7 @@ box.fixedToCamera = true;
         else if (cursors.right.isDown) {
             if (player.slow == false) {
                 player.body.velocity.x = 150;
-            } else {
-                game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse2, this);
+            } else {               
                 player.body.velocity.x = 75;
             }
 
@@ -371,13 +370,11 @@ box.fixedToCamera = true;
             }
         }
 
-
-
+        //Controles jugador 2
         if (a.isDown) {
             if (player2.slow == false) {
                 player2.body.velocity.x = -150;
-            } else {
-                game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse2, this);
+            } else {              
                 player2.body.velocity.x = -75;
             }
 
@@ -390,7 +387,6 @@ box.fixedToCamera = true;
             if (player2.slow == false) {
                 player2.body.velocity.x = 150;
             } else {
-                game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse2, this);
                 player2.body.velocity.x = 75;
             }
 
@@ -414,6 +410,15 @@ box.fixedToCamera = true;
             }
         }
 
+        if(player.slow == true){
+        game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse, this);
+        }
+
+        if(player2.slow == true){
+            game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse2, this);
+        }
+
+        //Controles de bola de fuego para cada jugador
         if (ballButton.isDown) {
             fireball(player);
         }
@@ -422,7 +427,7 @@ box.fixedToCamera = true;
             fireball2(player2);
         }
 
-
+        //Eventos de colisiones de las bolas de fuego
         game.physics.arcade.collide(balls, layer, collisionHandler, null, this);
         game.physics.arcade.collide(balls2, layer, collisionHandler, null, this);
 
@@ -431,7 +436,7 @@ box.fixedToCamera = true;
 
         game.physics.arcade.collide(balls, balls2, ballvsball, null, this);
 
-
+        //Gestión de salto
         if (player.body.onFloor()) {
             jumpCount = 0;
         }
