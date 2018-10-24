@@ -146,6 +146,27 @@ function fireball2(p) {
     }
 }
 
+function createBlocks() {
+    var pos = 120;
+    for (i = 0; i < 10; i++) {
+        b = blocks.children[i];      
+        b.reset(pos, 100);
+        b.body.gravity.y = 0;
+        b.body.maxVelocity.y = 0;
+        b.body.maxVelocity.x = 0;
+        pos += 40;
+    }
+}
+
+function p1vsblocks() {
+    for (i = 0; i < 10; i++) {
+        b = blocks.children[i];
+        if (player.x >= (b.x-32) && player.x <=(b.x + 32)) {
+            b.kill();
+        }
+    }
+}
+
 //funciones para manejar la ralentización del jugador
 function slowFalse() {
     player.slow = false;
@@ -247,6 +268,14 @@ CatCatcher.arcadeState.prototype = {
         game.physics.enable(block, Phaser.Physics.ARCADE);
         block.body.gravity.y = 0;
         block.body.maxVelocity.y = 0;
+
+
+        blocks = game.add.group();
+        blocks.enableBody = true;
+        blocks.physicsBodyType = Phaser.Physics.ARCADE;
+        blocks.createMultiple(10, 'block');
+
+        createBlocks();
 
         //Habilidades parte superior derecha
         boxball = game.add.sprite(710, 35, 'fireball');
@@ -482,6 +511,8 @@ box.fixedToCamera = true;
 
         game.physics.arcade.collide(block, player, p1block, null, this);
         game.physics.arcade.collide(block, player2, p2block, null, this);
+
+        game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
 
         //Gestión de salto
         if (player.body.onFloor()) {
