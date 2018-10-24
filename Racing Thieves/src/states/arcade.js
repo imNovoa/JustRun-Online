@@ -159,9 +159,20 @@ function createBlocks() {
 }
 
 function p1vsblocks() {
+    if(canShoot == false){canShoot = true; boxball.visible = true;}
     for (i = 0; i < 10; i++) {
         b = blocks.children[i];
         if (player.x >= (b.x-32) && player.x <=(b.x + 32)) {
+            b.kill();
+        }
+    }
+}
+
+function p2vsblocks() {
+    if(canShoot2 == false){canShoot2 = true; boxball2.visible = true;}
+    for (i = 0; i < 10; i++) {
+        b = blocks.children[i];
+        if (player2.x >= (b.x-32) && player2.x <=(b.x + 32)) {
             b.kill();
         }
     }
@@ -284,7 +295,7 @@ CatCatcher.arcadeState.prototype = {
         boxball.visible = false;
         boxball.fixedToCamera = true;
 
-        boxball2 = game.add.sprite(630, 35, 'fireball');
+        boxball2 = game.add.sprite(635, 35, 'fireball');
         boxball2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
         boxball2.animations.play('right');
         boxball2.visible = false;
@@ -382,6 +393,10 @@ pin.fixedToCamera = true;
 var box = game.add.sprite(710,15,'box');
 box.scale.setTo(.1,.1);
 box.fixedToCamera = true;
+
+var box2 = game.add.sprite(630,15,'box');
+box2.scale.setTo(.1,.1);
+box2.fixedToCamera = true;
 
 /////////////////////////
 },
@@ -513,6 +528,7 @@ box.fixedToCamera = true;
         game.physics.arcade.collide(block, player2, p2block, null, this);
 
         game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
+        game.physics.arcade.collide(blocks, player2, p2vsblocks, null, this);
 
         //Gestión de salto
         if (player.body.onFloor()) {
