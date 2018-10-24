@@ -16,6 +16,8 @@ var ballTime = 0;
 var ballTime2 = 0;
 var slowTime = 0;
 var slowTime2 = 0;
+var canShoot=false;
+var canShoot2=false;
 
 POWER=0;
 PROGRESS=0;
@@ -85,6 +87,17 @@ function ballvsball() {
     ball.kill();
 }
 
+function p1block() {
+    canShoot = true;
+    boxball.visible = true;
+    block.kill();
+}
+
+function p2block() {
+    canShoot2 = true;
+    boxball2.visible = true;
+    block.kill();
+}
 
 //bolas de fuego
 function fireball(p) {
@@ -228,6 +241,25 @@ CatCatcher.arcadeState.prototype = {
         player2.animations.add('left', [0, 1, 2, 3], 10, true);
         player2.animations.add('turn', [4], 20, true);
         player2.animations.add('right', [5, 6, 7, 8], 10, true);
+
+        //caja
+        block = game.add.sprite(80, 100, 'block');
+        game.physics.enable(block, Phaser.Physics.ARCADE);
+        block.body.gravity.y = 0;
+        block.body.maxVelocity.y = 0;
+
+        //Habilidades parte superior derecha
+        boxball = game.add.sprite(710, 35, 'fireball');
+        boxball.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
+        boxball.animations.play('right');
+        boxball.visible = false;
+        boxball.fixedToCamera = true;
+
+        boxball2 = game.add.sprite(630, 35, 'fireball');
+        boxball2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
+        boxball2.animations.play('right');
+        boxball2.visible = false;
+        boxball.fixedToCamera = true;
 
         //Controles
 
@@ -427,12 +459,16 @@ box.fixedToCamera = true;
         }
 
         //Controles de bola de fuego para cada jugador
-        if (ballButton.isDown) {
+        if (ballButton.isDown && canShoot == true) {
             fireball(player);
+            canShoot = false;
+            boxball.visible = false;
         }
 
-        if (ballButton2.isDown) {
+        if (ballButton2.isDown && canShoot2 == true) {
             fireball2(player2);
+            canShoot2 = false;
+            boxball2.visible = false;
         }
 
         //Eventos de colisiones de las bolas de fuego
@@ -443,6 +479,9 @@ box.fixedToCamera = true;
         game.physics.arcade.collide(player, balls2, p2vsp1, null, this);
 
         game.physics.arcade.collide(balls, balls2, ballvsball, null, this);
+
+        game.physics.arcade.collide(block, player, p1block, null, this);
+        game.physics.arcade.collide(block, player2, p2block, null, this);
 
         //Gestión de salto
         if (player.body.onFloor()) {

@@ -8,7 +8,7 @@ CatCatcher.preloadState.prototype = {
         this.load.image('background', '../assets/images/bg.png');
         this.load.image('cat', '../assets/images/cat.png');
         this.load.image('catcher', '../assets/images/catcher.png');
-        this.load.image('atari', 'assets/images/block.png');
+        this.load.image('block', 'assets/images/block.png');
         this.load.image('back', 'assets/images/background2.png');
         this.load.spritesheet('fireball', 'assets/images/FireBall.png',60,29);
         this.load.spritesheet('dude', 'assets/images/dude.png', 32, 48);
