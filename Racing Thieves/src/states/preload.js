@@ -10,7 +10,7 @@ CatCatcher.preloadState.prototype = {
         this.load.image('catcher', '../assets/images/catcher.png');
         this.load.image('atari', 'assets/images/block.png');
         this.load.image('back', 'assets/images/background2.png');
-        this.load.image('fireball', 'assets/images/Fireball.png');
+        this.load.spritesheet('fireball', 'assets/images/FireBall.png',60,29);
         this.load.spritesheet('dude', 'assets/images/dude.png', 32, 48);
         this.load.tilemap('mario', 'assets/maps/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'assets/tiles/super_mario.png');

@@ -93,10 +93,14 @@ function fireball(p) {
 
         if (ball) {
             if (p.frame == 0 || p.facing == 'left') {
-                ball.reset(p.x - 30, p.y);
+                ball.reset(p.x - 20, p.y + 10);
+                ball.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 12, true);
+                ball.animations.play('left');
                 ball.body.velocity.x = -400;   
             } else {
-                ball.reset(p.x + 30, p.y);
+                ball.reset(p.x + 20, p.y+10);
+                ball.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
+                ball.animations.play('right');
                 ball.body.velocity.x = 400;
             }
             ball.body.gravity.y = 0;
@@ -112,10 +116,14 @@ function fireball2(p) {
 
         if (ball2) {
             if (p.frame == 0 || p.facing == 'left') {
-                ball2.reset(p.x - 30, p.y);
+                ball2.reset(p.x - 20, p.y);
+                ball2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 12, true);
+                ball2.animations.play('left');
                 ball2.body.velocity.x = -400;
             } else {
-                ball2.reset(p.x + 30, p.y);
+                ball2.reset(p.x + 20, p.y);
+                ball2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
+                ball2.animations.play('right');
                 ball2.body.velocity.x = 400;
             }
             ball2.body.gravity.y = 0;
