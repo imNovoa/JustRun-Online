@@ -15,11 +15,16 @@ CatCatcher.preloadState.prototype = {
         this.load.tilemap('mario', 'assets/maps/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'assets/tiles/super_mario.png');
         this.load.image('3', 'assets/images/skill.png');
-        this.load.spritesheet('spark', 'assets/images/spark.png',180,206);
         this.load.image('box', 'assets/images/box.png');
         this.load.image('2', 'assets/images/greenbar2.png');
         this.load.image('1', 'assets/images/greenbar.png');
+        this.load.spritesheet('francesca', 'assets/images/Francesca_idle.png', 23, 80);
+        this.load.spritesheet('stela', 'assets/images/fire.png', 128, 128);
+        this.load.spritesheet('stelo', 'assets/images/firo.png', 23, 23);
+        this.load.image('level1', 'assets/images/level_1.png');
         this.load.spritesheet('coin', 'assets/images/coin.png', 40, 45);
+        this.load.spritesheet('spark', 'assets/images/spark.png',180,206);
+
         this.load.audio('lvl', 'assets/audio/lv.mp3');
         this.load.audio('menu', 'assets/audio/menu.mp3');
     },

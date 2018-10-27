@@ -18,8 +18,11 @@ var slowTime = 0;
 var slowTime2 = 0;
 var canShoot=false;
 var canShoot2=false;
+
+
 var skill=false;
 var skill2= false;
+
 var spark;
 
 var coins;
@@ -28,6 +31,7 @@ POWER=0;
 POWER2=0;
 PROGRESS=0;
 PROGRESS=0;
+
 
 // Funciones necesarias para implementar el doble salto
 function jump1() {
@@ -106,39 +110,40 @@ function p2block() {
     block.kill();
 }
 
+
 function p1coins() {
 
 
-        if(POWER!=2600){
+    if(POWER!=2600){
 
-            POWER+=200;
-            healthBar.width = healthBar.width + POWER;
-        }
-
-    for (i = 0; i < 50; i++) {
-        c = coins.children[i];
-        if (player.x >= (c.x-32) && player.x <=(c.x + 32)) {
-            c.kill();
-            }
-            
-        }
+        POWER+=200;
+        healthBar.width = healthBar.width + POWER;
     }
 
-    
+for (i = 0; i < 50; i++) {
+    c = coins.children[i];
+    if (player.x >= (c.x-32) && player.x <=(c.x + 32)) {
+        c.kill();
+        }
+        
+    }
+}
+
+
 
 
 
 function p2coins() {
-    
-        for (i = 0; i < 50; i++) {
-        c = coins.children[i];
-        if (player2.x >= (c.x-32) && player2.x <=(c.x + 32)) {
-            c.kill();
-            
-        }
+
+    for (i = 0; i < 50; i++) {
+    c = coins.children[i];
+    if (player2.x >= (c.x-32) && player2.x <=(c.x + 32)) {
+        c.kill();
+        
     }
-    
-    
+}
+
+
 }
 
 //bolas de fuego
@@ -252,6 +257,11 @@ function slowFalse2() {
     player2.slow = false;
 }
 
+function sprintFalse() {
+    player.sprint = false;
+}
+
+
 CatCatcher.arcadeState.prototype = {
 
    
@@ -276,10 +286,11 @@ CatCatcher.arcadeState.prototype = {
     map = game.add.tilemap('mario');
 
     map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
+    
 
     layer = map.createLayer('World1');
 
-    timer = new Phaser.Timer(game);
+    timer = new Phaser.Timer(game)
 
     map.setCollisionBetween(14, 16);
     map.setCollisionBetween(20, 25);
@@ -291,7 +302,9 @@ CatCatcher.arcadeState.prototype = {
         layer.wrap = true;
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
+        
 
+        //bg = game.add.image(0,0, 'level1');
 
         game.physics.arcade.gravity.y = 300;
 
@@ -313,17 +326,17 @@ CatCatcher.arcadeState.prototype = {
 
 
         //JUGADOR 1
-        player = game.add.sprite(32, 320, 'dude');
+        player = game.add.sprite(32, 320, 'francesca');
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
         player.body.gravity.y = 1000;
         player.body.maxVelocity.y = 500;
-        player.body.setSize(20, 32, 5, 16);
+        player.body.setSize(23,80);
 
         //animaciones
-        player.animations.add('left', [0, 1, 2, 3], 10, true);
-        player.animations.add('turn', [4], 20, true);
-        player.animations.add('right', [5, 6, 7, 8], 10, true);
+        //player.animations.add('left', [0, 1, 2, 3], 10, true);
+        //player.animations.add('turn', [4], 20, true);
+        player.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], 30, true);
 
         //JUGADOR 2
         player2 = game.add.sprite(60, 320, 'dude');
@@ -352,15 +365,15 @@ CatCatcher.arcadeState.prototype = {
 
         createBlocks();
 
+
         //monedas
         coins = game.add.group();
         coins.enableBody = true;
         coins.physicsBodyType = Phaser.Physics.ARCADE;
-        
+
         createCoins();
 
-
-        //Habilidades parte superior derecha
+        //es parte superior derecha
         boxball = game.add.sprite(710, 35, 'fireball');
         boxball.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
         boxball.animations.play('right');
@@ -371,7 +384,8 @@ CatCatcher.arcadeState.prototype = {
         boxball2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
         boxball2.animations.play('right');
         boxball2.visible = false;
-        boxball.fixedToCamera = true;
+        boxball2.fixedToCamera = true;
+
 
         //Controles
 
@@ -379,7 +393,7 @@ CatCatcher.arcadeState.prototype = {
         ballButton = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
         ballButton2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         one = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
-        
+
         //CONTROLES DEL JUGADOR 2
         w = game.input.keyboard.addKey(Phaser.Keyboard.W);
         a = game.input.keyboard.addKey(Phaser.Keyboard.A);
@@ -387,7 +401,9 @@ CatCatcher.arcadeState.prototype = {
         d = game.input.keyboard.addKey(Phaser.Keyboard.D);
         f = game.input.keyboard.addKey(Phaser.Keyboard.F);
 
+        
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+        
 
 
         //Otras propiedades del jugador
@@ -400,7 +416,12 @@ CatCatcher.arcadeState.prototype = {
         player.slow = false;
         player2.slow = false;
 
+        player.sprint = false;
+
           ///////bars
+
+    
+
 
 
 // BARRA DE PODER
@@ -487,10 +508,9 @@ box2.fixedToCamera = true;
         game.physics.arcade.collide(player, layer);
         game.physics.arcade.collide(player2, layer);
 
+         //es
 
-        //habilidades
-
-        if(POWER==2600){
+         if(POWER==2600){
             spark.visible = true;
             skill=true;
         }
@@ -498,6 +518,8 @@ box2.fixedToCamera = true;
             skill2=true;
         }
 
+        //barWidth = healthBar.width;
+        //healthBar.width = barWidth - barWidth/POWER;
 
         //velocidad de los jugadores a 0
         player.body.velocity.x = 0;
@@ -505,38 +527,69 @@ box2.fixedToCamera = true;
 
         //Controles jugador 1
         if (cursors.left.isDown) {
-            if (player.slow == false) {
+            if (player.sprint==true) {
+                
+                player.body.velocity.x = -450;
+                
+                fire = game.add.sprite(player.x-2, player.y-2, 'stela');
+                fire.scale.setTo(.7,.7);
+                fire.animations.add('hella', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13,12,11,10 ,9,8,7,6,5,4,3,2,1], 10, true);
+                fire.animations.play('hella');
+                
+            } else if(player.slow == false){
+
                 player.body.velocity.x = -150;
-            } else {
+
+                
+            }
+            else {
                 player.body.velocity.x = -75;
             }
 
+            
+            
+
             if (player.facing != 'left') {
-                player.animations.play('left');
+                //player.animations.play('left');
                 player.facing = 'left';
             }
         }
         else if (cursors.right.isDown) {
-            if (player.slow == false) {
+            if (player.sprint == true) {
+                player.body.velocity.x =450;
+
+                fire = game.add.sprite(player.x-47, player.y-2, 'stela');
+                fire.scale.setTo(.7,.7);
+                fire.animations.add('hella', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13,12,11,10 ,9,8,7,6,5,4,3,2,1], 10, true);
+                fire.animations.play('hella');
+                game.physics.arcade.collide(fire, player2, function() {
+                    player2.slow=true;
+                  }, null, this);
+
+                
+
+            } else if(player.slow == false) {  
                 player.body.velocity.x = 150;
-            } else {               
+                
+            }else{
                 player.body.velocity.x = 75;
             }
 
+
             if (player.facing != 'right') {
-                player.animations.play('right');
+                //player.animations.play('right');
                 player.facing = 'right';
             }
         }
         else {
             if (player.facing != 'idle') {
-                player.animations.stop();
+                player.animations.play('idle');
 
                 if (player.facing == 'left') {
-                    player.frame = 0;
+                    //player.frame = 0;
                 }
                 else {
-                    player.frame = 5;
+                    //player.frame = 5;
                 }
 
                 player.facing = 'idle';
@@ -591,6 +644,10 @@ box2.fixedToCamera = true;
             game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse2, this);
         }
 
+        if(player.sprint == true){
+            game.time.events.add(Phaser.Timer.SECOND * 4, sprintFalse, this);
+        }
+
         //Controles de bola de fuego para cada jugador
         if (ballButton.isDown && canShoot == true) {
             fireball(player);
@@ -604,13 +661,15 @@ box2.fixedToCamera = true;
             boxball2.visible = false;
         }
 
-        //controles habilidad especial
+
+        //controles  especial
 
         if(f.isDown && skill){
 
             
-            //INSERTAR HABILIDAD PERSONAJE/////////
-            //
+            //INSERTAR  HABILIDAD PERSONAJE/////////
+                player.sprint= true;
+                player.animations.play('hella');
             //
             ///////////////////////////////
 
@@ -643,7 +702,6 @@ box2.fixedToCamera = true;
 
         game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
         game.physics.arcade.collide(blocks, player2, p2vsblocks, null, this);
-
 
         //colisión monedas
 
