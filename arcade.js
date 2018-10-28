@@ -27,6 +27,9 @@ var spark;
 
 var coins;
 
+var fires;
+var explos;
+
 POWER=0;
 POWER2=0;
 PROGRESS=0;
@@ -124,6 +127,7 @@ for (i = 0; i < 50; i++) {
     c = coins.children[i];
     if (player.x >= (c.x-32) && player.x <=(c.x + 32)) {
         c.kill();
+        clink.play();
         }
         
     }
@@ -252,6 +256,29 @@ function slowFalse() {
     player.slow = false;
 }
 
+function slowTrue2(){
+    
+    player2.slow = true;
+
+    
+    
+
+    for (i = 0; i < fires.length; i++) {
+        f = fires.children[i];
+        if (game.physics.arcade.overlap(player2, f, null, null, this)) {
+            f.kill();
+
+            c = explos.create(player2.x, player2.y, 'stelo');
+            c.animations.add('ex', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37], 80, true);
+            c.killOnComplete=true;
+            c.play('ex', null, false, true);
+
+            }
+            
+        }
+    
+}
+
 
 function slowFalse2() {
     player2.slow = false;
@@ -261,6 +288,25 @@ function sprintFalse() {
     player.sprint = false;
 }
 
+function deadFire(){
+    fires.callAll('kill');
+}
+
+function firing(){
+
+
+
+
+        fire = fires.create(player.x-2, player.y-2, 'stela');
+        fire.scale.setTo(.7,.7);
+        fire.body.maxVelocity.x = 0;
+        fire.body.maxVelocity.y = 0;
+        fire.animations.add('hella', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13,12,11,10 ,9,8,7,6,5,4,3,2,1], 10, true);
+        fire.animations.play('hella');
+
+
+
+}
 
 CatCatcher.arcadeState.prototype = {
 
@@ -270,6 +316,8 @@ CatCatcher.arcadeState.prototype = {
     },
 
     create: function () {
+
+
 
                 //music
 
@@ -386,6 +434,24 @@ CatCatcher.arcadeState.prototype = {
         boxball2.visible = false;
         boxball2.fixedToCamera = true;
 
+        //fxs
+
+        explos = game.add.group();
+
+        fires = game.add.group();
+        fires.enableBody = true;
+        fires.physicsBodyType = Phaser.Physics.ARCADE;
+
+        ///sounds
+
+        music.stop();
+
+        music = game.add.audio('lvl');
+
+        clink= game.add.audio('coine');
+        run= game.add.audio('fireu');
+        thunder= game.add.audio('skile');
+
 
         //Controles
 
@@ -460,11 +526,13 @@ healthBar.fixedToCamera = true;
     lifebar.scale.setTo(.1,.1);
     lifebar.fixedToCamera = true;
 
+
+
     
 
 ///////////////////////////
 
-// BARRA DE PODER
+// BARRA DE PROGRESO
 
 var bmd3 = game.add.bitmapData(200,40);
 bmd3.ctx.beginPath();
@@ -478,13 +546,19 @@ pout.fixedToCamera = true;
 
 var bmd4 = game.add.bitmapData(200,40);
 bmd4.ctx.beginPath();
-bmd4.ctx.rect(0,0,175,7);
+bmd4.ctx.rect(0,0,2,7);
 bmd4.ctx.fillStyle = '#0AF2DF';
 bmd4.ctx.fill();
 
 pin = game.add.sprite(300,550,bmd4);
 
 pin.fixedToCamera = true;
+
+
+
+var fl = game.add.sprite(470,535,'flag');
+fl.scale.setTo(.02,.02);
+fl.fixedToCamera = true;
 
 ///////////////////////////
 
@@ -500,6 +574,7 @@ box2.scale.setTo(.1,.1);
 box2.fixedToCamera = true;
 
 /////////////////////////
+
 },
 
     update: function () {
@@ -513,6 +588,7 @@ box2.fixedToCamera = true;
          if(POWER==2600){
             spark.visible = true;
             skill=true;
+            run.play();
         }
         if(POWER2==2600){
             skill2=true;
@@ -526,15 +602,20 @@ box2.fixedToCamera = true;
         player2.body.velocity.x = 0;
 
         //Controles jugador 1
+
+        
         if (cursors.left.isDown) {
+
+
+
+
             if (player.sprint==true) {
                 
                 player.body.velocity.x = -450;
+
+                firing();
                 
-                fire = game.add.sprite(player.x-2, player.y-2, 'stela');
-                fire.scale.setTo(.7,.7);
-                fire.animations.add('hella', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13,12,11,10 ,9,8,7,6,5,4,3,2,1], 10, true);
-                fire.animations.play('hella');
+
                 
             } else if(player.slow == false){
 
@@ -557,16 +638,8 @@ box2.fixedToCamera = true;
         else if (cursors.right.isDown) {
             if (player.sprint == true) {
                 player.body.velocity.x =450;
-
-                fire = game.add.sprite(player.x-47, player.y-2, 'stela');
-                fire.scale.setTo(.7,.7);
-                fire.animations.add('hella', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13,12,11,10 ,9,8,7,6,5,4,3,2,1], 10, true);
-                fire.animations.play('hella');
-                game.physics.arcade.collide(fire, player2, function() {
-                    player2.slow=true;
-                  }, null, this);
-
-                
+                firing();
+            
 
             } else if(player.slow == false) {  
                 player.body.velocity.x = 150;
@@ -598,6 +671,9 @@ box2.fixedToCamera = true;
 
         //Controles jugador 2
         if (a.isDown) {
+
+            game.physics.arcade.collide(fires, player2, slowTrue2, null, this);
+
             if (player2.slow == false) {
                 player2.body.velocity.x = -150;
             } else {              
@@ -610,6 +686,9 @@ box2.fixedToCamera = true;
             }
         }
         else if (d.isDown) {
+
+            game.physics.arcade.collide(fires, player2, slowTrue2, null, this);
+
             if (player2.slow == false) {
                 player2.body.velocity.x = 150;
             } else {
@@ -645,7 +724,9 @@ box2.fixedToCamera = true;
         }
 
         if(player.sprint == true){
-            game.time.events.add(Phaser.Timer.SECOND * 4, sprintFalse, this);
+            game.time.events.add(Phaser.Timer.SECOND * 2, sprintFalse, this);
+            game.time.events.add(Phaser.Timer.SECOND * 5, deadFire, this);
+
         }
 
         //Controles de bola de fuego para cada jugador
@@ -666,10 +747,13 @@ box2.fixedToCamera = true;
 
         if(f.isDown && skill){
 
+            thunder.play();
+
             
             //INSERTAR  HABILIDAD PERSONAJE/////////
                 player.sprint= true;
                 player.animations.play('hella');
+                
             //
             ///////////////////////////////
 
@@ -724,6 +808,11 @@ box2.fixedToCamera = true;
 
         cursors.up.onDown.add(jump);
         w.onDown.add(p2jump);
+
+
+        //progreso
+
+        pin.width= (player.x*1.9*3);
 
 }
 
