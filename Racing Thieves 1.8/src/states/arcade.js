@@ -20,7 +20,7 @@ var canShoot=false;
 var canShoot2 = false;
 var shootLeft = false;
 var shootLeft2 = false;
-
+var winner;
 
 var skill=false;
 var skill2= false;
@@ -38,7 +38,8 @@ PROGRESS=0;
 PROGRESS=0;
 
 
-// Funciones necesarias para implementar el doble salto
+// Funciones necesarias para implementar el doble salto, usamos un contador para que solo se pueda saltar 2 veces.
+
 function jump1() {
     player.body.velocity.y = -700;
     jumpCount++;
@@ -83,7 +84,9 @@ function p2jump() {
 }
 
 
-//Eventos de colisiones
+//Eventos de colisiones, en los que definimos qué pasa cuando un jugador colisiona con una bola, una bola con el mundo, etc.
+//Después las llamaremos en update
+
 function collisionHandler(ball, layer) {
     ball.kill();
 }
@@ -116,6 +119,9 @@ function p2block() {
 }
 
 
+//En esta función usamos el grupo de monedas que hemos creado y con un for comprobamos las colisiones para todas las monedas
+//Hay una función para el jugador uno y otra para el jugador 2
+
 function p1coins() {
 
 
@@ -135,10 +141,6 @@ for (i = 0; i < 50; i++) {
     }
 }
 
-
-
-
-
 function p2coins() {
 
     for (i = 0; i < 50; i++) {
@@ -152,7 +154,11 @@ function p2coins() {
 
 }
 
-//bolas de fuego
+//Funciones de creacion de bolas de fuego, sacamos la primera bola del grupo de bolas y también tenemos en cuenta
+//si el jugador está mirando para la derecha o para la izquierda, además le añadimos la animación
+//Hay una función para el jugador uno y otra para el jugador 2
+//Le pasamos el jugador "p" porque estaba pensado que "shootLeft" fuera un atributo del mismo, pero no funcionaba correctamente
+
 function fireball(p) {
     if (game.time.now > ballTime) {
         ball = balls.getFirstExists(false);
@@ -199,6 +205,8 @@ function fireball2(p) {
     }
 }
 
+//Creación de cajas misteriosas y de monedas, la y es random y la x se va sumando en cada iteración
+
 function createBlocks() {
     var pos = 120;
     for (i = 0; i < 5; i++) {
@@ -233,6 +241,7 @@ function createCoins() {
 
 }
 
+//Colisiones de jugadores con cajas misteriosas, similar a las colisiones con las monedas
 function p1vsblocks() {
     if(canShoot == false){canShoot = true; boxball.visible = true;}
     for (i = 0; i < 10; i++) {
@@ -258,12 +267,11 @@ function slowFalse() {
     player.slow = false;
 }
 
+//colisiones con el fuego de la habilidad especial, se añade una animacion de explosion y se destruye el fuego
 function slowTrue2(){
     
     player2.slow = true;
-
-    
-    
+ 
 
     for (i = 0; i < fires.length; i++) {
         f = fires.children[i];
@@ -286,6 +294,7 @@ function slowFalse2() {
     player2.slow = false;
 }
 
+//función usada cuando se acaba el sprint de la habilidad especial
 function sprintFalse() {
     player.sprint = false;
 }
@@ -294,10 +303,9 @@ function deadFire(){
     fires.callAll('kill');
 }
 
+
+//habilidad especial, genera fuego en la estela del jugador, tiene su propia animación.
 function firing(){
-
-
-
 
         fire = fires.create(player.x-2, player.y-2, 'stela');
         fire.scale.setTo(.7,.7);
@@ -305,8 +313,6 @@ function firing(){
         fire.body.maxVelocity.y = 0;
         fire.animations.add('hella', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13,12,11,10 ,9,8,7,6,5,4,3,2,1], 10, true);
         fire.animations.play('hella');
-
-
 
 }
 
@@ -356,6 +362,8 @@ CatCatcher.arcadeState.prototype = {
 
         game.physics.arcade.gravity.y = 100;
 
+
+        //Creamos un grupo de phaser para las bolas de fuego, de tal manera que podemos generarlas dinámicamente cuando el jugador dispare
         //Bolas de fuego del jugador 1
         balls = game.add.group();
         balls.enableBody = true;
@@ -373,7 +381,7 @@ CatCatcher.arcadeState.prototype = {
         balls2.setAll('checkWorldBounds', true);
 
 
-        //JUGADOR 1
+        //Creación del JUGADOR 1
         player = game.add.sprite(32, 320, 'francesca');
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
@@ -388,7 +396,7 @@ CatCatcher.arcadeState.prototype = {
         player.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
         player.animations.add('idleleft', [94, 93, 92, 91, 90, 99, 98, 97, 96, 95, 104, 103, 102, 101, 100, 109, 108, 107, 106, 105, 114, 113, 112, 111, 110,119,118,117,116,115], 30, true);
 
-        //JUGADOR 2
+        //Creación del JUGADOR 2
         player2 = game.add.sprite(60, 320, 'francesca2');
         game.physics.enable(player2, Phaser.Physics.ARCADE);
         player2.body.collideWorldBounds = true;
@@ -402,6 +410,8 @@ CatCatcher.arcadeState.prototype = {
         player2.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
         player2.animations.add('idleleft', [94, 93, 92, 91, 90, 99, 98, 97, 96, 95, 104, 103, 102, 101, 100, 109, 108, 107, 106, 105, 114, 113, 112, 111, 110, 119, 118, 117, 116, 115], 30, true);
 
+
+        //Grupo de cajas misteriosas, monedas y fuego, similar a las bolas de fuego
         blocks = game.add.group();
         blocks.enableBody = true;
         blocks.physicsBodyType = Phaser.Physics.ARCADE;
@@ -581,7 +591,7 @@ box2.fixedToCamera = true;
         game.physics.arcade.collide(player, layer);
         game.physics.arcade.collide(player2, layer);
 
-         //es
+         //Si la barra de poder está llena, podemos usar la habilidad especial
 
          if(POWER==2600){
             spark.visible = true;
@@ -599,9 +609,9 @@ box2.fixedToCamera = true;
         player.body.velocity.x = 0;
         player2.body.velocity.x = 0;
 
+        //Al mover al jugador para un lado u otro, tenemos que activar su respectiva animación, indicamos también si shootLeft es true o false
+        //Para así disparar al lado correcto, y tenemos en cuenta también si el jugador está afectado por ralentización o si tiene habilidad especial.
         //Controles jugador 1
-
-        
         if (cursors.left.isDown) {
             player.body.setSize(50, 85);
 
@@ -659,7 +669,6 @@ box2.fixedToCamera = true;
                 player.body.setSize(30, 85, 26);
 
                 if (player.facing == 'left') {
-                    //player.frame = 0;
                     player.animations.play('idleleft');
                     shootLeft = true;
                 }
@@ -723,6 +732,8 @@ box2.fixedToCamera = true;
             }
         }
 
+
+        //timers para la ralentización del jugador, en este caso 2 segundos
         if(player.slow == true){
         game.time.events.add(Phaser.Timer.SECOND * 2, slowFalse, this);
         }
@@ -814,6 +825,17 @@ box2.fixedToCamera = true;
         cursors.up.onDown.add(jump);
         w.onDown.add(p2jump);
 
+
+        //Detecta si un jugador llega a la meta y lo guarda como ganador de la partida.
+        if (player.x == 5856) {
+            winner = 'jugador 1';
+            this.state.start('ending');
+        }
+
+        if (player2.x == 5856) {
+            winner = 'jugador 2';
+            this.state.start('ending');
+        }
 
         //progreso
 
