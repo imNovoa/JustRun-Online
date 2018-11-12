@@ -50,10 +50,11 @@ La intención del juego es crear mecánicas simples pero que resulten entretenid
 
 * Botón de “Play” que permite acceder a la siguiente pantalla (1).
 
+Prototipo de baja fidelidad
 ![](https://i.imgur.com/RRCziVY.jpg)
->Prototipo de baja fidelidad
+Pantalla inicial final
 ![](https://i.imgur.com/7hhC6H2.jpg)
->Pantalla inicial final
+
 
 (1) Menú principal: 
 
@@ -68,10 +69,10 @@ La intención del juego es crear mecánicas simples pero que resulten entretenid
 * Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
 * Simbolo de interrogante, que saca una ventana con los controles. Dirige a (6).
 
+Prototipo de baja fidelidad
 ![](https://i.imgur.com/aUGARoC.jpg)
->Prototipo de baja fidelidad
+Menú principal final (añadido "Juego Local" por motivo de la segunda fase del proyecto)
 ![](https://i.imgur.com/cZcg77G.jpg)
->Menú principal final (añadido "Juego Local" por motivo de la segunda fase del proyecto)
 
 (2) Crear Partida: 
 
@@ -133,27 +134,27 @@ Para un mayor detalle de todo esto, mostramos el correspondiente diagrama UML. L
 
 El juego consta de cuatro diferentes personajes, dos masculinos y dos femeninos. Cada uno posee capacidades específicas (ser más ágil, o más fuerte... depende del personaje).
 
-* Evelin : Impulsiva, maniática, alegre pero con un retorcido sentido del humor. Ama las cosas brillantes. Roba objetos de los museos porque relucen. A pesar de que a primera vista parezca negada para el trabajo, es muy capaz. Logra superar sus obstáculos como si lo hiciera sin querer, siendo torpe pero efectiva. Delgada, ojos grandes, cabello pelirrojo enmarañado. Se flipa MUCHISIMO. 
+* Evelin : Impulsiva, maniática, alegre pero con un retorcido sentido del humor. Ama las cosas brillantes. Roba objetos de los museos porque relucen. A pesar de que a primera vista parezca negada para el trabajo, es muy capaz. Logra superar sus obstáculos como si lo hiciera sin querer, siendo torpe pero efectiva. Delgada, ojos grandes, cabello pelirrojo enmarañado. Se flipa MUCHISIMO.
 
+Concepto del personaje
 ![](https://i.imgur.com/QtXlxxL.jpg)
->Concepto del personaje
 
 * Francesca :  Elegante, misteriosa, sofisticada. Con una ambición desmedida. Solo roba objetos por el riesgo que conlleva. Muy atlética, cabello negro, bella, sigilosa. Ha estado varias veces en la carcel pero siempre consigue escapar. Sabe correr con TACONES. Tiene un montón de artilugios chulos para entrar en los museos.  
 
+Concepto del personaje
 ![](https://i.imgur.com/uIMrvmq.jpg)
->Concepto del personaje
+Imagen de selección del personaje
 ![](https://i.imgur.com/eiwfxgR.jpg)
->Imagen de selección del personaje
 
 * Gray: Un auténtico lobo de mar. De edad adulta, con barba gris, de facciones duras y cuerpo grueso pero fuerte. Considerado a sí mismo un pirata de la edad moderna, se dedica a robar los objetos históricos al puro estilo pirata. Armado hasta los dientes. Silencioso y reflexivo. De sensibilidad muy desarrollada. Ama mirar la luna mientras escucha Fly me to the moon en la cubierta de su barco “Bessy”. 
 
+Concepto del personaje
 ![](https://i.imgur.com/yCrlgxU.jpg)
->Concepto del personaje
 
 * Frank Drake: Aventurero experto ladrón de tumbas y objetos raros para llenar un vacío existencial que solo puede llenar poniendo su vida en peligro. Siempre pone en peligro a los demás. Solo estuvo capturado otra vez antes de esta, en una cárcel panameña.
 
+Concepto del personaje
 ![](https://i.imgur.com/k7fyLVP.jpg)
->Concepto del personaje
 
 Visión general de estética: 
 
@@ -170,15 +171,15 @@ El resto de los niveles estarán centrados en una temática concreta, que será 
 
 Las distintas temáticas serán: Cárcel (Primer nivel) Egipto, Grecia, París, Japón, Roma, Museo de Londres (nivel final donde está la joya). 
 
+Concepto de jugabilidad
 ![](https://i.imgur.com/Fh8vnD0.jpg)
 ![](https://i.imgur.com/NsH30Qf.jpg)
->Concepto de jugabilidad
 
+Jugador usando item en juego
 ![](https://i.imgur.com/E8lQAGM.jpg)
->Jugador usando item en juego
 
+Jugador con habilidad cargada y objeto en el cuadro
 ![](https://i.imgur.com/R6DBqUJ.jpg)
->Jugador con habilidad cargada y objeto en el cuadro
 
 **HABILIDADES** 
 
