@@ -51,6 +51,9 @@ La intención del juego es crear mecánicas simples pero que resulten entretenid
 * Botón de “Play” que permite acceder a la siguiente pantalla (1).
 
 ![](https://i.imgur.com/RRCziVY.jpg)
+>Prototipo de baja fidelidad
+![](https://i.imgur.com/7hhC6H2.jpg)
+>Pantalla inicial final
 
 (1) Menú principal: 
 
@@ -60,12 +63,15 @@ La intención del juego es crear mecánicas simples pero que resulten entretenid
 
     - Crear partida: crea una partida desde cero, y te permite elegir un mapa. Dirige a (2) 
 
-    - Buscar partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
+    - Unirse a partida: muestra una lista de partidas disponibles en la que se indica el mapa elegido y los jugadores que están en dicha y te permite unirte a la sesión. Dirige a (3) 
 
 * Símbolo de Sonido y corchete musical, que te permiten modificar los sonidos de juego (Efectos y música) 
 * Simbolo de interrogante, que saca una ventana con los controles. Dirige a (6).
 
 ![](https://i.imgur.com/aUGARoC.jpg)
+>Prototipo de baja fidelidad
+![](https://i.imgur.com/cZcg77G.jpg)
+>Menú principal final (añadido "Juego Local" por motivo de la segunda fase del proyecto)
 
 (2) Crear Partida: 
 
@@ -129,15 +135,25 @@ El juego consta de cuatro diferentes personajes, dos masculinos y dos femeninos.
 
 * Evelin : Impulsiva, maniática, alegre pero con un retorcido sentido del humor. Ama las cosas brillantes. Roba objetos de los museos porque relucen. A pesar de que a primera vista parezca negada para el trabajo, es muy capaz. Logra superar sus obstáculos como si lo hiciera sin querer, siendo torpe pero efectiva. Delgada, ojos grandes, cabello pelirrojo enmarañado. Se flipa MUCHISIMO. 
 
+![](https://i.imgur.com/QtXlxxL.jpg)
+>Concepto del personaje
+
 * Francesca :  Elegante, misteriosa, sofisticada. Con una ambición desmedida. Solo roba objetos por el riesgo que conlleva. Muy atlética, cabello negro, bella, sigilosa. Ha estado varias veces en la carcel pero siempre consigue escapar. Sabe correr con TACONES. Tiene un montón de artilugios chulos para entrar en los museos.  
 
 ![](https://i.imgur.com/uIMrvmq.jpg)
+>Concepto del personaje
+![](https://i.imgur.com/eiwfxgR.jpg)
+>Imagen de selección del personaje
 
 * Gray: Un auténtico lobo de mar. De edad adulta, con barba gris, de facciones duras y cuerpo grueso pero fuerte. Considerado a sí mismo un pirata de la edad moderna, se dedica a robar los objetos históricos al puro estilo pirata. Armado hasta los dientes. Silencioso y reflexivo. De sensibilidad muy desarrollada. Ama mirar la luna mientras escucha Fly me to the moon en la cubierta de su barco “Bessy”. 
 
 ![](https://i.imgur.com/yCrlgxU.jpg)
+>Concepto del personaje
 
-* Frank Drake: Aventurero experto ladrón de tumbas y objetos raros para llenar un vacío existencial que solo puede llenar poniendo su vida en peligro. Siempre pone en peligro a los demás. Solo estuvo capturado otra vez antes de esta, en una cárcel panameña. De cuerpo atlético, joven (30 años), guapo.  
+* Frank Drake: Aventurero experto ladrón de tumbas y objetos raros para llenar un vacío existencial que solo puede llenar poniendo su vida en peligro. Siempre pone en peligro a los demás. Solo estuvo capturado otra vez antes de esta, en una cárcel panameña.
+
+![](https://i.imgur.com/k7fyLVP.jpg)
+>Concepto del personaje
 
 Visión general de estética: 
 
@@ -153,8 +169,16 @@ Los niveles compartirán el mismo patrón de diseño. La zona media será consid
 El resto de los niveles estarán centrados en una temática concreta, que será coherente respecto a la pequeña historia que queremos contar con el videojuego. 
 
 Las distintas temáticas serán: Cárcel (Primer nivel) Egipto, Grecia, París, Japón, Roma, Museo de Londres (nivel final donde está la joya). 
+
 ![](https://i.imgur.com/Fh8vnD0.jpg)
 ![](https://i.imgur.com/NsH30Qf.jpg)
+>Concepto de jugabilidad
+
+![](https://i.imgur.com/E8lQAGM.jpg)
+>Jugador usando item en juego
+
+![](https://i.imgur.com/R6DBqUJ.jpg)
+>Jugador con habilidad cargada y objeto en el cuadro
 
 **HABILIDADES** 
 
@@ -162,7 +186,7 @@ Cada uno de los cuatro personajes tiene una habilidad única que podrá utilizar
 
 Las habilidades a las que el jugador podrá optar son las siguientes: 
 
-* Teletransportación: permite al jugador desplazarse hacia delante instantáneamente en cualquier momento que deseé, reduciendo el riesgo de chocar con obstáculos.  Esto otorga una jugabilidad mucho más dinámica y mayor libertad de movimiento. Tiene una duración de 10 segundos. Este es el poder de **Evelin**
+* Wendigo: el jugador se convierte en un montruo capaz de realizar saltos más potenes y aumentar ligeramente su velocidad. Sigue siendo vulnerable a objetos. Tiene una duración de 10 segundos. Este es el poder de **Evelin**
 
 * Forma fantasmal: el jugador se vuelve completamente invulnerable a todos los obstáculos y trampas y ataques de otros jugadores durante un periodo de tiempo de 5 segundos. Este es el poder de **Gray**
 
@@ -174,11 +198,11 @@ Las habilidades a las que el jugador podrá optar son las siguientes:
 
 Las armas se recogen en cajas que hay distribuidas por el mapa, el objeto es aleatorio y tienen un solo uso. Estas son las diferentes armas:
 
-* Bola de fuego: lanza un disparo que al impactar en un adversario provoca que este se frene por completo durante un breve periodo de tiempo. 
+* Bola de fuego: lanza un disparo que al impactar en un adversario provoca que este reduzca su velocidad durante un breve periodo de tiempo. 
+
+![](https://i.imgur.com/RsK7hkB.gif)
 
 * Mina: objeto que se suelta en el mapa y que, si un jugador pasa por encima, este se frena por completo durante un breve periodo de tiempo. 
-
-* Pegamento extrafuerte: deja un charco de pegamento en el suelo que ralentiza a los jugadores que pasen por encima. 
 
 * Rayo congelador: Lanza una bola de hielo con parábola que si acierta a otro jugador lo frena en seco. Para que el otro jugador salga del hielo, debe dar al botón space muy rápido repetidas veces.  
 
@@ -199,8 +223,6 @@ Los ítems se recogen de la misma manera que las armas, son aleatorios y tambié
 **MÚSICA Y SONIDOS** 
 
 Música marchosa, animada, con tintes de música electrónica, pero de estilo divertida. 
-
-Voces no dobladas. 
 
 Sonidos provenientes de un banco de sonidos. 
 
