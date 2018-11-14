@@ -138,6 +138,8 @@ El juego consta de cuatro diferentes personajes, dos masculinos y dos femeninos.
 
 Concepto del personaje
 ![](https://i.imgur.com/QtXlxxL.jpg)
+Imagen de selección de personaje
+![](https://i.imgur.com/XOGeKeV.jpg)
 
 * Francesca :  Elegante, misteriosa, sofisticada. Con una ambición desmedida. Solo roba objetos por el riesgo que conlleva. Muy atlética, cabello negro, bella, sigilosa. Ha estado varias veces en la carcel pero siempre consigue escapar. Sabe correr con TACONES. Tiene un montón de artilugios chulos para entrar en los museos.  
 
