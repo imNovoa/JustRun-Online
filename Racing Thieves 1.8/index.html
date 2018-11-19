@@ -1,12 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8" />
-
     <!-- Título de la página -->
     <title>Racing Thieves</title>
-
     <!-- Cargamos los archivos JS -->
     <script src="scripts/phaser.min.js"></script>
     <script src="src/states/boot.js"></script>
@@ -18,8 +15,8 @@
     <script src="src/states/create.js"></script>
     <script src="src/states/join.js"></script>
     <script src="src/states/arcade.js"></script>
+    <script src="src/states/online.js"></script>
     <script src="src/index.js"></script>
-
 </head>
 <body>
 
@@ -36,6 +33,7 @@
             game.state.add('create', CatCatcher.createState);
             game.state.add('join', CatCatcher.joinState);
             game.state.add('arcade', CatCatcher.arcadeState);
+            game.state.add('arcade', CatCatcher.onlineState);
 
             game.state.start('boot');
 
