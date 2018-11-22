@@ -3,6 +3,7 @@ CatCatcher.onlineState = function(game) {
 }
 
 var player;
+var catCatcher2;
 var jumpTimer = 0;
 var cursors;
 var ballButton;
@@ -16,6 +17,9 @@ var slowTime = 0;
 var canShoot=false;
 var shootLeft = false;
 var winner;
+var lastAnimation = -1;
+var aR = 0;
+var aL = 0;
 
 var skill=false;
 
@@ -305,8 +309,16 @@ CatCatcher.onlineState.prototype = {
         this.getPlayer(function (player2Data) {
         	game.player2 = JSON.parse(JSON.stringify(player2Data));
         	catCatcher2 = game.add.sprite(game.player2.x, game.player2.y, 'francesca2');
+        	game.physics.enable(catCatcher2, Phaser.Physics.ARCADE);
+        	catCatcher2.animations.add('right', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49], 20, true);
+            catCatcher2.animations.add('left', [124, 123, 122, 121, 120, 129, 128, 127, 126, 125, 134, 133, 132, 131, 130,139,138,137,136,135], 20, true);
+            catCatcher2.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
+            catCatcher2.animations.add('idleleft', [94, 93, 92, 91, 90, 99, 98, 97, 96, 95, 104, 103, 102, 101, 100, 109, 108, 107, 106, 105, 114, 113, 112, 111, 110,119,118,117,116,115], 30, true);
         	console.log(JSON.stringify(game.player2))
         })
+        
+        
+        
 
         blocks = game.add.group();
         blocks.enableBody = true;
@@ -474,14 +486,26 @@ box.fixedToCamera = true;
         // pinte su ubicación.
         this.getPlayer( function (updatePlayer2) {
         	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
+        	if(catCatcher2.x<game.player2.x){
+        		catCatcher2.animations.play('right');
+        		lastAnimation = 0;
+        	}else if(catCatcher2.x>game.player2.x){
+        		catCatcher2.animations.play('left');
+        		lastAnimation = 1;
+        	}else if(lastAnimation>0){
+        		catCatcher2.animations.play('idleleft');
+        	}else{
+        		catCatcher2.animations.play('idleright');
+        	}
         	catCatcher2.x = game.player2.x;
-        	catCatcher2.y = game.player2.y;
-        	catCatcher2.score = game.player2.score;
+        	catCatcher2.y = game.player2.y;        	
         	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
         })
 
         //Activamos colisiones de los jugadores con el mundo
         game.physics.arcade.collide(player, layer);
+        game.physics.arcade.collide(catCatcher2, layer);
+        
 
 
          //es
