@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameController {
 
 	Map<Long, Player> players = new ConcurrentHashMap<>();
+	Map<Long, Ball> balls = new ConcurrentHashMap<>();
 	AtomicLong nextId = new AtomicLong(0);
+	AtomicLong nextB = new AtomicLong(2);
 	Random rnd = new Random();
-	Cat cat = new Cat();
+	Ball ball = new Ball();
 
 	// Con GET recuperamos el número de jugadores
 	@GetMapping(value = "/game")
@@ -80,17 +82,62 @@ public class GameController {
 		}
 	}
 	
-	// Con POST creamos un nuevo jugador
-	@PostMapping(value = "/cat")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Cat randomizeCat() {
-		cat = new Cat();
-		return cat;
+	// Con GET recuperamos el número de jugadores
+	@GetMapping(value = "/ball")
+	public Collection<Ball> getBalls() {
+		return balls.values();
 	}
 	
-	// Con GET recuperamos el número de jugadores
-	@GetMapping(value = "/cat")
-	public Cat getCat() {
-		return cat;
+	// Con POST creamos un nuevo jugador
+	@PostMapping(value = "/ball")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Ball newBall() {
+		Ball ball = new Ball();
+		long id = nextB.incrementAndGet();
+		ball.setX(0);
+		ball.setY(0);
+		ball.setId(id);
+		balls.put(ball.getId(), ball);
+		return ball;
+	}
+	
+	
+	// Con este GET, podemos recuperar la información particular de cada uno de los
+	// jugadores
+	@GetMapping(value = "/ball/{id}")
+	public ResponseEntity<Ball> getBall(@PathVariable long id) {
+		Ball ball = balls.get(id);
+		if (ball != null) {
+			return new ResponseEntity<>(ball, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	
+	// Con este PUT actualizamos la información del jugador con ID = id
+	@PutMapping(value = "/ball/{id}")
+	public ResponseEntity<Ball> updateBall(@PathVariable long id, @RequestBody Ball ball) {
+		Ball savedBall = balls.get(ball.getId());
+		if (savedBall != null) {
+			balls.put(id, ball);
+			return new ResponseEntity<>(ball, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+
+// Con este DELETE borramos el jugador con ID = id
+@DeleteMapping(value = "/ball/{id}")
+public ResponseEntity<Ball> borraBall(@PathVariable long id) {
+	Ball savedBall = balls.get(id);
+	if (savedBall != null) {
+		balls.remove(savedBall.getId());
+		return new ResponseEntity<>(savedBall, HttpStatus.OK);
+	} else {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }
+}
+

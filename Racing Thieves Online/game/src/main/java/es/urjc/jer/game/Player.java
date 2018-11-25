@@ -3,7 +3,7 @@ package es.urjc.jer.game;
 public class Player {
 
 	private long id;
-	private int x, y;
+	private int x, y, velocityX;
 	private int score;
 	
 	Player() {
@@ -24,6 +24,14 @@ public class Player {
 
 	public void setX(int x) {
 		this.x = x;
+	}
+	
+	public int getVelocityX() {
+		return velocityX;
+	}
+
+	public void setVelocityX(int x) {
+		this.velocityX = x;
 	}
 
 	public int getY() {
