@@ -80,8 +80,6 @@ function p1block() {
 
 
 function p1coins() {
-
-
     if(POWER!=2600){
 
         POWER+=200;
@@ -230,13 +228,16 @@ CatCatcher.onlineState.prototype = {
 				game.ball2 = {id:4}
 			}else{
 				game.ball2 = {id:3}
-			}
+            }
+            
+            game.coins.id =5;
 			
 		},
 		
     preload: function () {
     	console.log(JSON.stringify(game.player1));
-    	console.log(JSON.stringify(game.ball1));
+        console.log(JSON.stringify(game.ball1));
+        console.log(JSON.stringify(game.coins));
     },
 
     create: function () {
@@ -345,6 +346,35 @@ CatCatcher.onlineState.prototype = {
         	b2.visible = false;
         	console.log(JSON.stringify(game.ball2))
         })
+
+        this.getCoin(function (CoinsData) {
+
+            var pos = 240;
+            //  Now let's add 50 coins into it
+
+
+            game.coins = JSON.parse(JSON.stringify(CoinsData));
+            
+            for (var i = 0; i < 50; i++)
+            {
+    
+                c = coins.create(120 * i, game.rnd.integerInRange(0, 500), 'coin');
+    
+                c.scale.setTo(.6,.6);
+                c.body.maxVelocity.y = 0;
+                c.body.maxVelocity.x = 0;
+    
+                
+                c.animations.add('do', [0, 1, 2, 3, 4, 5], 12, true);
+                c.animations.play('do');
+
+                
+    
+                pos+=50;
+            }
+
+        	console.log(JSON.stringify(game.coins))
+        })
         
         
         
@@ -358,9 +388,13 @@ CatCatcher.onlineState.prototype = {
 
 
         //monedas
-        coins = game.add.group();
-        coins.enableBody = true;
-        coins.physicsBodyType = Phaser.Physics.ARCADE;
+
+        if(!game.coins.isGenerated()){
+            coins = game.add.group();
+            coins.enableBody = true;
+            coins.physicsBodyType = Phaser.Physics.ARCADE;
+        }
+
 
         createCoins();
 
@@ -538,6 +572,20 @@ box.fixedToCamera = true;
         
         this.getBall( function (updateBall2) {
         	game.ball2 = JSON.parse(JSON.stringify(updateBall2));
+        	if(game.ball2.visibility == true){
+        		b2.visible = true;
+        	}
+        	if(b2.x<game.ball2.x){
+        		b2.animations.play('right');
+        	}else if(b2.x>game.ball2.x){
+        		b2.animations.play('left');
+        	}
+        	b2.x = game.ball2.x;
+        	b2.y = game.ball2.y;        	
+        })
+
+        this.getCoin( function (updateCoin) {
+        	game.coins = JSON.parse(JSON.stringify(updateCoin));
         	if(game.ball2.visibility == true){
         		b2.visible = true;
         	}
@@ -778,6 +826,38 @@ putBall() {
         method: "PUT",
         url: window.location.href + '/ball/' + game.ball1.id,
         data: JSON.stringify(game.ball1),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+    	//console.log("Actualizada posicion de ball 1: " + JSON.stringify(data))
+    })
+},
+
+getCoin(callback) {
+    $.ajax({
+        method: "GET",
+        url: window.location.href + '/coin/' + game.coins.id,
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        game.coins = JSON.parse(JSON.stringify(data));
+        callback(data);
+    })
+},
+
+
+//Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
+putCoin() {
+	game.coins.x = coins.x;
+	game.coins.y = coins.y;
+    $.ajax({
+        method: "PUT",
+        url: window.location.href + '/coin/' + game.coins.id,
+        data: JSON.stringify(game.coins),
         processData: false,
         headers: {
             "Content-Type": "application/json"

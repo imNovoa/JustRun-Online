@@ -22,10 +22,12 @@ public class GameController {
 
 	Map<Long, Player> players = new ConcurrentHashMap<>();
 	Map<Long, Ball> balls = new ConcurrentHashMap<>();
+	Map<Long, Coin> coins = new ConcurrentHashMap<>();
 	AtomicLong nextId = new AtomicLong(0);
 	AtomicLong nextB = new AtomicLong(2);
 	Random rnd = new Random();
 	Ball ball = new Ball();
+	Coin coin = new Coin();
 
 	// Con GET recuperamos el número de jugadores
 	@GetMapping(value = "/game")
@@ -135,6 +137,65 @@ public ResponseEntity<Ball> borraBall(@PathVariable long id) {
 	if (savedBall != null) {
 		balls.remove(savedBall.getId());
 		return new ResponseEntity<>(savedBall, HttpStatus.OK);
+	} else {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+}
+
+
+	// Con GET recuperamos el número de jugadores
+	@GetMapping(value = "/coin")
+	public Collection<Coin> getCoins() {
+		return coins.values();
+	}
+	
+	// Con POST creamos un nuevo jugador
+	@PostMapping(value = "/coin")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Coin newCoin() {
+		Ball coin = new Coin();
+		long id = nextB.incrementAndGet();
+		coin.setX(0);
+		coin.setY(0);
+		coin.setId(id);
+		coins.put(coin.getId(), coin);
+		return coin;
+	}
+	
+	
+	// Con este GET, podemos recuperar la información particular de cada uno de los
+	// jugadores
+	@GetMapping(value = "/coin/{id}")
+	public ResponseEntity<Coin> getCoin(@PathVariable long id) {
+		Coin coin = coins.get(id);
+		if (coin != null) {
+			return new ResponseEntity<>(coin, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	
+	// Con este PUT actualizamos la información del jugador con ID = id
+	@PutMapping(value = "/coin/{id}")
+	public ResponseEntity<Coin> updateCoin(@PathVariable long id, @RequestBody Coin coin) {
+		Ball savedCoin = coins.get(coin.getId());
+		if (savedCoin != null) {
+			coins.put(id, coin);
+			return new ResponseEntity<>(coin, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+
+// Con este DELETE borramos el jugador con ID = id
+@DeleteMapping(value = "/coin/{id}")
+public ResponseEntity<Ball> borraCoin(@PathVariable long id) {
+	Ball savedCoin = coins.get(id);
+	if (savedCoin != null) {
+		coins.remove(savedCoin.getId());
+		return new ResponseEntity<>(savedCoin, HttpStatus.OK);
 	} else {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
