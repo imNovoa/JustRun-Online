@@ -2,6 +2,8 @@ CatCatcher.joinState = function (game) {
 
 }
 
+var numPlayers;
+
 CatCatcher.joinState.prototype = {
 	
 	// Obtenemos el número de jugadores creados con this.getNumPlayers. Si ya hay 
@@ -15,6 +17,8 @@ CatCatcher.joinState.prototype = {
 				game.state.start('menu');
 			}
 		});
+		
+
 	},
 		
     preload: function () {
@@ -28,6 +32,8 @@ CatCatcher.joinState.prototype = {
     // sigue con la ejecución de PRELOAD y de CREATE. ¡¡¡ Esa es una de las claves.!!!
     create: function () {
     	this.createPlayer();
+    	this.createBall();
+
     },
 
     // Una vez hay suficientes jugadores, se pasa a levelState. El problema de no hacer en INIT
@@ -41,11 +47,12 @@ CatCatcher.joinState.prototype = {
 				game.state.start('online');
 			}
 		});
+		
     }, 
     
     getNumPlayers: function (callback) {
         $.ajax({
-            url: 'http://localhost:8080/game',
+            url: window.location.href + '/game',
         }).done(function (data) {
             callback(data);
         })
@@ -54,7 +61,7 @@ CatCatcher.joinState.prototype = {
     createPlayer: function () {
         $.ajax({
             method: "POST",
-            url: 'http://localhost:8080/game',
+            url: window.location.href + '/game',
             processData: false,
             headers: {
                 "Content-Type": "application/json"
@@ -63,5 +70,27 @@ CatCatcher.joinState.prototype = {
             console.log("Player created: " + JSON.stringify(data));
             game.player1 = data
         })
+    },
+    
+    createBall: function () {
+        $.ajax({
+            method: "POST",
+            url: window.location.href + '/ball',
+            processData: false,
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }).done(function (data) {
+            console.log("Ball created: " + JSON.stringify(data));
+            game.ball1 = data;
+        })
     }
+
+    
+
+    
+
 }
+
+
+

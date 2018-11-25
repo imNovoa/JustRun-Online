@@ -9,7 +9,7 @@ var cursors;
 var ballButton;
 var jumpCount;
 var ball;
-var ball2;
+var b2;
 var layer;
 var balls;
 var ballTime = 0;
@@ -18,8 +18,8 @@ var canShoot=false;
 var shootLeft = false;
 var winner;
 var lastAnimation = -1;
-var aR = 0;
-var aL = 0;
+var ballId;
+var ballExists = false;
 
 var skill=false;
 
@@ -64,11 +64,11 @@ function collisionHandler(ball, layer) {
 
 function p2vsp1() {
     player.slow = true;
-    ball2.kill();
+    b2.kill();
 }
 
 function ballvsball() {
-    ball2.kill();
+	b2.kill();
     ball.kill();
 }
 
@@ -103,6 +103,7 @@ for (i = 0; i < 50; i++) {
 function fireball(p) {
     if (game.time.now > ballTime) {
         ball = balls.getFirstExists(false);
+        ball.visible = true;
 
         if (ball) {
             if (shootLeft == true || p.facing == 'left') {
@@ -224,16 +225,23 @@ CatCatcher.onlineState.prototype = {
 			} else {
 				game.player2 = {id: 1}
 			}
+			
+			if(game.ball1.id == 3){
+				game.ball2 = {id:4}
+			}else{
+				game.ball2 = {id:3}
+			}
+			
 		},
 		
     preload: function () {
-    	console.log(JSON.stringify(game.player1))
+    	console.log(JSON.stringify(game.player1));
+    	console.log(JSON.stringify(game.ball1));
     },
 
     create: function () {
-
-
-
+    	
+    	
                 //music
 
                 music.stop();
@@ -276,7 +284,13 @@ CatCatcher.onlineState.prototype = {
         balls.createMultiple(30, 'fireball');
         balls.setAll('outOfBoundsKill', true);
         balls.setAll('checkWorldBounds', true);
-
+        
+        ball = game.add.sprite(0, 0, 'fireball');
+        game.physics.enable(ball, Phaser.Physics.ARCADE);
+        ball.body.gravity.y = 0;
+        ball.body.maxVelocity.y = 0;
+        ball.visible = false;
+        
         //Bolas de fuego del jugador 2
         balls2 = game.add.group();
         balls2.enableBody = true;
@@ -315,6 +329,21 @@ CatCatcher.onlineState.prototype = {
             catCatcher2.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
             catCatcher2.animations.add('idleleft', [94, 93, 92, 91, 90, 99, 98, 97, 96, 95, 104, 103, 102, 101, 100, 109, 108, 107, 106, 105, 114, 113, 112, 111, 110,119,118,117,116,115], 30, true);
         	console.log(JSON.stringify(game.player2))
+        })
+        
+        
+        this.getBall(function (ball2Data) {
+        	game.ball2 = JSON.parse(JSON.stringify(ball2Data));
+            game.ball2.x = 0;
+            game.ball2.y = 0;
+            b2 = game.add.sprite(game.ball2.x, game.ball2.y, 'fireball');
+        	game.physics.enable(b2, Phaser.Physics.ARCADE);
+        	b2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 12, true);
+        	b2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
+        	b2.body.gravity.y = 0;
+        	b2.body.maxVelocity.y = 0;
+        	b2.visible = false;
+        	console.log(JSON.stringify(game.ball2))
         })
         
         
@@ -481,6 +510,9 @@ box.fixedToCamera = true;
     	
     	// Manda al servidor la posición actualizada de player 1 para que el otro jugador pueda actualizarla.
         this.putPlayer();
+        
+        if(ballExists){this.putBall(); game.ball1.visibility = true;};
+        
     	
     	// Obtiene mediante GET la posición de player 2. Usa un callback para que UNA VEZ tenga su posición,
         // pinte su ubicación.
@@ -500,6 +532,22 @@ box.fixedToCamera = true;
         	catCatcher2.x = game.player2.x;
         	catCatcher2.y = game.player2.y;        	
         	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
+        })
+        
+        
+        
+        this.getBall( function (updateBall2) {
+        	game.ball2 = JSON.parse(JSON.stringify(updateBall2));
+        	if(game.ball2.visibility == true){
+        		b2.visible = true;
+        	}
+        	if(b2.x<game.ball2.x){
+        		b2.animations.play('right');
+        	}else if(b2.x>game.ball2.x){
+        		b2.animations.play('left');
+        	}
+        	b2.x = game.ball2.x;
+        	b2.y = game.ball2.y;        	
         })
 
         //Activamos colisiones de los jugadores con el mundo
@@ -613,6 +661,7 @@ box.fixedToCamera = true;
             fireball(player);
             canShoot = false;
             boxball.visible = false;
+            ballExists = true;
         }
 
 
@@ -678,7 +727,7 @@ box.fixedToCamera = true;
 getPlayer(callback) {
     $.ajax({
         method: "GET",
-        url: 'http://localhost:8080/game/' + game.player2.id,
+        url: window.location.href + '/game/' + game.player2.id,
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -695,7 +744,7 @@ putPlayer() {
 	game.player1.y = player.y;
     $.ajax({
         method: "PUT",
-        url: 'http://localhost:8080/game/' + game.player1.id,
+        url: window.location.href + '/game/' + game.player1.id,
         data: JSON.stringify(game.player1),
         processData: false,
         headers: {
@@ -704,7 +753,40 @@ putPlayer() {
     }).done(function (data) {
     	//console.log("Actualizada posicion de player 1: " + JSON.stringify(data))
     })
+},
+
+getBall(callback) {
+    $.ajax({
+        method: "GET",
+        url: window.location.href + '/ball/' + game.ball2.id,
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        game.ball2 = JSON.parse(JSON.stringify(data));
+        callback(data);
+    })
+},
+
+
+//Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
+putBall() {
+	game.ball1.x = ball.x;
+	game.ball1.y = ball.y;
+    $.ajax({
+        method: "PUT",
+        url: window.location.href + '/ball/' + game.ball1.id,
+        data: JSON.stringify(game.ball1),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+    	//console.log("Actualizada posicion de ball 1: " + JSON.stringify(data))
+    })
 }
+
 
 
 }
