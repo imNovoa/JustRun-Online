@@ -36,7 +36,7 @@ public class Coin {
 		this.y = y;
 	}
 
-	public boolean setGenerated(boolean gen) {
+	public void setGenerated(boolean gen) {
 		this.generated = gen;
 	}
 

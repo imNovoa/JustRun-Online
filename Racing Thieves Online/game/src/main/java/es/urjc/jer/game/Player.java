@@ -5,6 +5,9 @@ public class Player {
 	private long id;
 	private int x, y, velocityX;
 	private int score;
+	private boolean rightDown = false; 
+	private boolean leftDown = false;
+	
 	
 	Player() {
 		this.score = 0;
@@ -48,6 +51,22 @@ public class Player {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+	
+	public void setRight(boolean b) {
+		rightDown = b;
+	}
+	
+	public boolean getRight() {
+		return rightDown;
+	}
+	
+	public void setLeft(boolean b) {
+		leftDown = b;
+	}
+	
+	public boolean getLeft() {
+		return leftDown;
 	}
 
 	@Override

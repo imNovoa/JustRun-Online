@@ -25,9 +25,11 @@ public class GameController {
 	Map<Long, Coin> coins = new ConcurrentHashMap<>();
 	AtomicLong nextId = new AtomicLong(0);
 	AtomicLong nextB = new AtomicLong(2);
+	AtomicLong nextC = new AtomicLong(4);
 	Random rnd = new Random();
 	Ball ball = new Ball();
 	Coin coin = new Coin();
+	int i = 0;
 
 	// Con GET recuperamos el número de jugadores
 	@GetMapping(value = "/game")
@@ -44,6 +46,8 @@ public class GameController {
 		player.setId(id);
 		player.setX(rnd.nextInt(700));
 		player.setY(rnd.nextInt(500));
+		player.setRight(false);
+		player.setLeft(false);
 		players.put(player.getId(), player);
 		return player;
 	}
@@ -142,8 +146,7 @@ public ResponseEntity<Ball> borraBall(@PathVariable long id) {
 	}
 }
 
-
-	// Con GET recuperamos el número de jugadores
+//Con GET recuperamos el número de jugadores
 	@GetMapping(value = "/coin")
 	public Collection<Coin> getCoins() {
 		return coins.values();
@@ -153,10 +156,11 @@ public ResponseEntity<Ball> borraBall(@PathVariable long id) {
 	@PostMapping(value = "/coin")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Coin newCoin() {
-		Ball coin = new Coin();
-		long id = nextB.incrementAndGet();
-		coin.setX(0);
-		coin.setY(0);
+		Coin coin = new Coin();
+		long id = nextC.incrementAndGet();
+		coin.setX(120*(i));
+		i++;
+		coin.setY(rnd.nextInt(500));
 		coin.setId(id);
 		coins.put(coin.getId(), coin);
 		return coin;
@@ -179,7 +183,7 @@ public ResponseEntity<Ball> borraBall(@PathVariable long id) {
 	// Con este PUT actualizamos la información del jugador con ID = id
 	@PutMapping(value = "/coin/{id}")
 	public ResponseEntity<Coin> updateCoin(@PathVariable long id, @RequestBody Coin coin) {
-		Ball savedCoin = coins.get(coin.getId());
+		Coin savedCoin = coins.get(coin.getId());
 		if (savedCoin != null) {
 			coins.put(id, coin);
 			return new ResponseEntity<>(coin, HttpStatus.OK);
@@ -189,10 +193,10 @@ public ResponseEntity<Ball> borraBall(@PathVariable long id) {
 	}
 
 
-// Con este DELETE borramos el jugador con ID = id
+//Con este DELETE borramos el jugador con ID = id
 @DeleteMapping(value = "/coin/{id}")
-public ResponseEntity<Ball> borraCoin(@PathVariable long id) {
-	Ball savedCoin = coins.get(id);
+public ResponseEntity<Coin> borraCoin(@PathVariable long id) {
+	Coin savedCoin = coins.get(id);
 	if (savedCoin != null) {
 		coins.remove(savedCoin.getId());
 		return new ResponseEntity<>(savedCoin, HttpStatus.OK);
