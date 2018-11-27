@@ -2,7 +2,7 @@ CatCatcher.joinState = function (game) {
 
 }
 
-var numPlayers;
+var i = 0;
 
 CatCatcher.joinState.prototype = {
 	
@@ -32,8 +32,10 @@ CatCatcher.joinState.prototype = {
     // sigue con la ejecución de PRELOAD y de CREATE. ¡¡¡ Esa es una de las claves.!!!
     create: function () {
     	this.createPlayer();
-        this.createBall();
-        this.createCoins();
+    	this.createBall();
+    	for(var i = 0; i<25; i++){
+    	this.createCoins();
+    	}
 
     },
 
@@ -56,6 +58,7 @@ CatCatcher.joinState.prototype = {
             url: window.location.href + '/game',
         }).done(function (data) {
             callback(data);
+            
         })
     },
     
@@ -86,7 +89,7 @@ CatCatcher.joinState.prototype = {
             game.ball1 = data;
         })
     },
-
+    
     createCoins: function () {
         $.ajax({
             method: "POST",
@@ -100,7 +103,6 @@ CatCatcher.joinState.prototype = {
             game.c = data;
         })
     }
-
 
     
 

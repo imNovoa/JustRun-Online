@@ -20,8 +20,13 @@ var winner;
 var lastAnimation = -1;
 var ballId;
 var ballExists = false;
-
+var coin2;
 var skill=false;
+
+var coinsX = new Array();
+var coinsY = new Array();
+
+var checkCoin = false;
 
 var spark;
 
@@ -58,28 +63,40 @@ function jump() {
 
 //Eventos de colisiones
 function collisionHandler(ball, layer) {
-    ball.kill();
+    ball.x=-100;
+    ball.y = 0;
+    ball.visible = false;
 }
 
 
 function p2vsp1() {
     player.slow = true;
-    b2.kill();
+    b2.x = 0;
+    b2.y = 0;
+    b2.visible = false;
+}
+
+function p1vp2() {
+    ball.x = -100;
+    ball.y = 0;
+    ball.visible = false;
 }
 
 function ballvsball() {
-	b2.kill();
-    ball.kill();
+	b2.x = 0;
+    b2.y = 0;
+    b2.visible = false;
+	ball.x=-100;
+    ball.y = 0;
+    ball.visible = false;
 }
 
-function p1block() {
-    canShoot = true;
-    boxball.visible = true;
-    block.kill();
-}
+
 
 
 function p1coins() {
+
+
     if(POWER!=2600){
 
         POWER+=200;
@@ -91,6 +108,18 @@ for (i = 0; i < 50; i++) {
     if (player.x >= (c.x-61) && player.x <=(c.x + 61)) {
         c.kill();
         clink.play();
+        }
+        
+    }
+}
+
+function p2coins() {
+
+
+for (i = 0; i < 50; i++) {
+    c = coins.children[i];
+    if (catCatcher2.x >= (c.x-61) && catCatcher2.x <=(c.x + 61)) {
+        c.kill();
         }
         
     }
@@ -124,9 +153,16 @@ function fireball(p) {
 
 function createBlocks() {
     var pos = 120;
-    for (i = 0; i < 5; i++) {
-        b = blocks.children[i];      
-        b.reset(pos, game.rnd.integerInRange(0, 500));
+    for (i = 0; i < 8; i++) {
+        b = blocks.children[i];  
+        if(i==0){b.reset(475, 80);};
+        if(i==1){b.reset(475, 412);};
+        if(i==2){b.reset(1043, 687);};
+        if(i==3){b.reset(2178, 240);};
+        if(i==4){b.reset(2178, 99);};
+        if(i==5){b.reset(3493, 99);};
+        if(i==6){b.reset(3886, 295);};
+        if(i==7){b.reset(4955, 115);};
         b.body.gravity.y = 0;
         b.body.maxVelocity.y = 0;
         b.body.maxVelocity.x = 0;
@@ -135,23 +171,24 @@ function createBlocks() {
 }
 
 function createCoins() {
-
-    var pos = 240;
+	
         //  Now let's add 50 coins into it
-        for (var i = 0; i < 50; i++)
-        {
+	 for (i = 0; i < 50; i++)
+     {
+     	c = coins.children[i]; 
+     	c.reset(coinsX[i] ,coinsY[i]);
 
-            c = coins.create(120 * i, game.rnd.integerInRange(0, 500), 'coin');
+     	c.scale.setTo(.6,.6);
+     	c.body.maxVelocity.y = 0;
+     	c.body.maxVelocity.x = 0;
 
-            c.scale.setTo(.6,.6);
-            c.body.maxVelocity.y = 0;
-            c.body.maxVelocity.x = 0;
-
-            c.animations.add('do', [0, 1, 2, 3, 4, 5], 12, true);
-            c.animations.play('do');
-
-            pos+=50;
-        }
+     	c.animations.add('do', [0, 1, 2, 3, 4, 5], 12, true);
+     	c.animations.play('do');
+     	if(i == 49){
+     		checkCoin = false;
+     	}
+     }
+     
     
 
 }
@@ -161,6 +198,15 @@ function p1vsblocks() {
     for (i = 0; i < 10; i++) {
         b = blocks.children[i];
         if (player.x >= (b.x-61) && player.x <=(b.x + 61)) {
+            b.kill();
+        }
+    }
+}
+
+function p2vsblocks() {
+    for (i = 0; i < 10; i++) {
+        b = blocks.children[i];
+        if (catCatcher2.x >= (b.x-61) && catCatcher2.x <=(b.x + 61)) {
             b.kill();
         }
     }
@@ -228,21 +274,34 @@ CatCatcher.onlineState.prototype = {
 				game.ball2 = {id:4}
 			}else{
 				game.ball2 = {id:3}
-            }
-            
-            game.coins.id =5;
+			}
+			if(game.c.id == 5){
+				game.c2 = {id:5}
+			}else{
+				game.c2 = {id:6}
+			}
+			
 			
 		},
 		
     preload: function () {
     	console.log(JSON.stringify(game.player1));
-        console.log(JSON.stringify(game.ball1));
-        console.log(JSON.stringify(game.coins));
+    	console.log(JSON.stringify(game.ball1));
+    	
+   
     },
 
     create: function () {
     	
-    	
+    	this.getNumCoins(function (numCoins) {
+    		for(var i = 0; i<50; i++){
+    			coinsX[i] = numCoins[i].x;
+    			coinsY[i] = numCoins[i].y;
+    			if(i ==49){
+    				checkCoin = true;
+    			}
+    		}
+    	});
                 //music
 
                 music.stop();
@@ -333,10 +392,10 @@ CatCatcher.onlineState.prototype = {
         })
         
         
+
+        
         this.getBall(function (ball2Data) {
         	game.ball2 = JSON.parse(JSON.stringify(ball2Data));
-            game.ball2.x = 0;
-            game.ball2.y = 0;
             b2 = game.add.sprite(game.ball2.x, game.ball2.y, 'fireball');
         	game.physics.enable(b2, Phaser.Physics.ARCADE);
         	b2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 12, true);
@@ -345,35 +404,6 @@ CatCatcher.onlineState.prototype = {
         	b2.body.maxVelocity.y = 0;
         	b2.visible = false;
         	console.log(JSON.stringify(game.ball2))
-        })
-
-        this.getCoin(function (CoinsData) {
-
-            var pos = 240;
-            //  Now let's add 50 coins into it
-
-
-            game.coins = JSON.parse(JSON.stringify(CoinsData));
-            
-            for (var i = 0; i < 50; i++)
-            {
-    
-                c = coins.create(120 * i, game.rnd.integerInRange(0, 500), 'coin');
-    
-                c.scale.setTo(.6,.6);
-                c.body.maxVelocity.y = 0;
-                c.body.maxVelocity.x = 0;
-    
-                
-                c.animations.add('do', [0, 1, 2, 3, 4, 5], 12, true);
-                c.animations.play('do');
-
-                
-    
-                pos+=50;
-            }
-
-        	console.log(JSON.stringify(game.coins))
         })
         
         
@@ -388,15 +418,20 @@ CatCatcher.onlineState.prototype = {
 
 
         //monedas
+        coins = game.add.group();
+        coins.enableBody = true;
+        coins.physicsBodyType = Phaser.Physics.ARCADE;
+        coins.createMultiple(50, 'coin');
+        
+        coins2 = game.add.group();
+        coins2.enableBody = true;
+        coins2.physicsBodyType = Phaser.Physics.ARCADE;
+        coins2.createMultiple(50, 'coin');
+        
+       
 
-        if(!game.coins.isGenerated()){
-            coins = game.add.group();
-            coins.enableBody = true;
-            coins.physicsBodyType = Phaser.Physics.ARCADE;
-        }
+    
 
-
-        createCoins();
 
 
         //fxs
@@ -545,6 +580,10 @@ box.fixedToCamera = true;
     	// Manda al servidor la posición actualizada de player 1 para que el otro jugador pueda actualizarla.
         this.putPlayer();
         
+        if(checkCoin == true){
+        	createCoins();
+        }
+        
         if(ballExists){this.putBall(); game.ball1.visibility = true;};
         
     	
@@ -583,20 +622,8 @@ box.fixedToCamera = true;
         	b2.x = game.ball2.x;
         	b2.y = game.ball2.y;        	
         })
-
-        this.getCoin( function (updateCoin) {
-        	game.coins = JSON.parse(JSON.stringify(updateCoin));
-        	if(game.ball2.visibility == true){
-        		b2.visible = true;
-        	}
-        	if(b2.x<game.ball2.x){
-        		b2.animations.play('right');
-        	}else if(b2.x>game.ball2.x){
-        		b2.animations.play('left');
-        	}
-        	b2.x = game.ball2.x;
-        	b2.y = game.ball2.y;        	
-        })
+        
+        
 
         //Activamos colisiones de los jugadores con el mundo
         game.physics.arcade.collide(player, layer);
@@ -738,19 +765,23 @@ box.fixedToCamera = true;
 
 
         //Eventos de colisiones de las bolas de fuego
-        game.physics.arcade.collide(balls, layer, collisionHandler, null, this);
-        game.physics.arcade.collide(balls2, layer, collisionHandler, null, this);
+        game.physics.arcade.collide(ball, layer, collisionHandler, null, this);
+        game.physics.arcade.collide(b2, layer, collisionHandler, null, this);
 
-        game.physics.arcade.collide(player, balls2, p2vsp1, null, this);
+        game.physics.arcade.collide(player, b2, p2vsp1, null, this);
+        
+        game.physics.arcade.collide(catCatcher2, ball, p1vp2, null, this);
 
-        game.physics.arcade.collide(balls, balls2, ballvsball, null, this);
+        game.physics.arcade.collide(ball, b2, ballvsball, null, this);
 
         game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
 
+        game.physics.arcade.collide(blocks, catCatcher2, p2vsblocks, null, this);
 
         //colisión monedas
 
       game.physics.arcade.collide(coins, player, p1coins, null, this);
+      game.physics.arcade.collide(coins, catCatcher2, p2coins, null, this);
 
         //Gestión de salto
         if (player.body.onFloor()) {
@@ -803,6 +834,20 @@ putPlayer() {
     })
 },
 
+putCoin() {
+	
+    $.ajax({
+        method: "PUT",
+        url: window.location.href + '/coin/' + game.c.id,
+        data: JSON.stringify(game.c),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+    })
+},
+
 getBall(callback) {
     $.ajax({
         method: "GET",
@@ -816,6 +861,21 @@ getBall(callback) {
         callback(data);
     })
 },
+
+getCoins(callback) {
+    $.ajax({
+        method: "GET",
+        url: window.location.href + '/coin/' + game.c2.id,
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        game.c2 = JSON.parse(JSON.stringify(data));
+        callback(data);
+    })
+},
+
 
 
 //Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
@@ -835,37 +895,14 @@ putBall() {
     })
 },
 
-getCoin(callback) {
+getNumCoins: function (callback) {
     $.ajax({
-        method: "GET",
-        url: window.location.href + '/coin/' + game.coins.id,
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
+        url: window.location.href + '/coin',
     }).done(function (data) {
-        game.coins = JSON.parse(JSON.stringify(data));
         callback(data);
     })
 },
 
-
-//Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
-putCoin() {
-	game.coins.x = coins.x;
-	game.coins.y = coins.y;
-    $.ajax({
-        method: "PUT",
-        url: window.location.href + '/coin/' + game.coins.id,
-        data: JSON.stringify(game.coins),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-    	//console.log("Actualizada posicion de ball 1: " + JSON.stringify(data))
-    })
-}
 
 
 
