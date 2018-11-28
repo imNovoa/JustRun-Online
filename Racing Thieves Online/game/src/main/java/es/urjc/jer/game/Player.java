@@ -5,6 +5,7 @@ public class Player {
 	private long id;
 	private int x, y, velocityX;
 	private int score;
+	private int skin;
 	private boolean rightDown = false; 
 	private boolean leftDown = false;
 	
@@ -19,6 +20,14 @@ public class Player {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public long getSkin() {
+		return skin;
+	}
+
+	public void setSkin(int skin) {
+		this.skin = skin;
 	}
 
 	public int getX() {

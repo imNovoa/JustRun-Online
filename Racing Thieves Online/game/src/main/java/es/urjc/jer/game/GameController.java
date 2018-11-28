@@ -48,6 +48,7 @@ public class GameController {
 		player.setY(rnd.nextInt(500));
 		player.setRight(false);
 		player.setLeft(false);
+		player.setSkin(0);
 		players.put(player.getId(), player);
 		return player;
 	}
@@ -205,4 +206,3 @@ public ResponseEntity<Coin> borraCoin(@PathVariable long id) {
 	}
 }
 }
-
