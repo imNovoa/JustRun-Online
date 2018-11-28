@@ -17,6 +17,7 @@
     <script src="src/states/join.js"></script>
     <script src="src/states/arcade.js"></script>
     <script src="src/states/online.js"></script>
+    <script src="src/states/character.js"></script>
     <script src="src/index.js"></script>
 </head>
 <body>
@@ -35,6 +36,7 @@
             game.state.add('arcade', CatCatcher.arcadeState);
             game.state.add('online', CatCatcher.onlineState);
             game.state.add('join', CatCatcher.joinState);
+            game.state.add('character', CatCatcher.characterState);
            
 
             game.state.start('boot');
