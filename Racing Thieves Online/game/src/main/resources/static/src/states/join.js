@@ -73,6 +73,7 @@ CatCatcher.joinState.prototype = {
         }).done(function (data) {
             console.log("Player created: " + JSON.stringify(data));
             game.player1 = data
+            game.player1.skin = skin;
         })
     },
     
@@ -109,6 +110,3 @@ CatCatcher.joinState.prototype = {
     
 
 }
-
-
-

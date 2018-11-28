@@ -27,6 +27,7 @@ var coinsX = new Array();
 var coinsY = new Array();
 
 var checkCoin = false;
+var checkPlayer2 = false;
 
 var spark;
 
@@ -312,7 +313,7 @@ CatCatcher.onlineState.prototype = {
                 
                 music.play();
 
-    game.stage.backgroundColor = '#787878';
+    game.stage.backgroundColor = '#000000';
 
     map = game.add.tilemap('mario');
 
@@ -361,7 +362,11 @@ CatCatcher.onlineState.prototype = {
 
 
         //JUGADOR 1
+        if(skin == 0){
         player = game.add.sprite(32, 320, 'francesca');
+        }else{
+        	player = game.add.sprite(32, 320, 'drake');
+        }
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
         player.body.gravity.y = 1000;
@@ -371,9 +376,9 @@ CatCatcher.onlineState.prototype = {
         //animaciones
         //player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49], 20, true);
-        player.animations.add('left', [124, 123, 122, 121, 120, 129, 128, 127, 126, 125, 134, 133, 132, 131, 130,139,138,137,136,135], 20, true);
+        player.animations.add('left', [84, 83, 82,81,80,89,88,87,86,85,94,93,92,91,90,99,98,97,96,95], 20, true);
         player.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
-        player.animations.add('idleleft', [94, 93, 92, 91, 90, 99, 98, 97, 96, 95, 104, 103, 102, 101, 100, 109, 108, 107, 106, 105, 114, 113, 112, 111, 110,119,118,117,116,115], 30, true);
+        player.animations.add('idleleft', [54,53,52,51,50,59,58,57,56,55,65,64,63,62,61,60,69,68,67,66,65,74,73,72,71,70,79,78,77,76,75], 30, true);
 
         
         // Obtenemos la posición del jugador 2 y lo pintamos. No nos importa la física, ya que será
@@ -382,13 +387,18 @@ CatCatcher.onlineState.prototype = {
         // del player 2, la pintemos en escenario y así evitar un undefined.
         this.getPlayer(function (player2Data) {
         	game.player2 = JSON.parse(JSON.stringify(player2Data));
-        	catCatcher2 = game.add.sprite(game.player2.x, game.player2.y, 'francesca2');
+        	if(game.player2.skin == 0){
+        	catCatcher2 = game.add.sprite(game.player2.x, game.player2.y, 'francesca');
+        	}else{
+        	catCatcher2 = game.add.sprite(game.player2.x, game.player2.y, 'drake');
+        	}
         	game.physics.enable(catCatcher2, Phaser.Physics.ARCADE);
         	catCatcher2.animations.add('right', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49], 20, true);
-            catCatcher2.animations.add('left', [124, 123, 122, 121, 120, 129, 128, 127, 126, 125, 134, 133, 132, 131, 130,139,138,137,136,135], 20, true);
-            catCatcher2.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
-            catCatcher2.animations.add('idleleft', [94, 93, 92, 91, 90, 99, 98, 97, 96, 95, 104, 103, 102, 101, 100, 109, 108, 107, 106, 105, 114, 113, 112, 111, 110,119,118,117,116,115], 30, true);
+        	catCatcher2.animations.add('left', [84, 83, 82,81,80,89,88,87,86,85,94,93,92,91,90,99,98,97,96,95], 20, true);
+        	catCatcher2.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
+        	catCatcher2.animations.add('idleleft', [54,53,52,51,50,59,58,57,56,55,65,64,63,62,61,60,69,68,67,66,65,74,73,72,71,70,79,78,77,76,75], 30, true);
         	console.log(JSON.stringify(game.player2))
+        	checkPlayer2=true;
         })
         
         
@@ -770,13 +780,16 @@ box.fixedToCamera = true;
 
         game.physics.arcade.collide(player, b2, p2vsp1, null, this);
         
-        game.physics.arcade.collide(catCatcher2, ball, p1vp2, null, this);
+        
 
-        game.physics.arcade.collide(ball, b2, ballvsball, null, this);
+       game.physics.arcade.collide(ball, b2, ballvsball, null, this);
 
         game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
 
-        game.physics.arcade.collide(blocks, catCatcher2, p2vsblocks, null, this);
+        if(checkPlayer2 == true){
+        	game.physics.arcade.collide(blocks, catCatcher2, p2vsblocks, null, this);
+        	game.physics.arcade.collide(catCatcher2, ball, p1vp2, null, this);
+        }
 
         //colisión monedas
 
@@ -901,7 +914,7 @@ getNumCoins: function (callback) {
     }).done(function (data) {
         callback(data);
     })
-},
+}
 
 
 

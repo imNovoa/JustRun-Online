@@ -38,7 +38,7 @@ CatCatcher.menuState.prototype = {
 
         local.ns = 'local';
         crear.ns = 'create';
-        join.ns = 'join';
+        join.ns = 'character';
 
         local.events.onInputOver.add(over, this);
         local.events.onInputOut.add(out, this);
