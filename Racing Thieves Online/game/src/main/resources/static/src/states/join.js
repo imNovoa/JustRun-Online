@@ -46,6 +46,7 @@ CatCatcher.joinState.prototype = {
     update: function () {
 		this.getNumPlayers(function (numPlayers) {
 			if (numPlayers.length === 2) {
+				game.player1.skin = skin;
 				console.log ('##### COMIENZA EL JUEGO #####');
 				game.state.start('online');
 			}
@@ -72,8 +73,7 @@ CatCatcher.joinState.prototype = {
             },
         }).done(function (data) {
             console.log("Player created: " + JSON.stringify(data));
-            game.player1 = data
-            game.player1.skin = skin;
+            game.player1 = data           
         })
     },
     

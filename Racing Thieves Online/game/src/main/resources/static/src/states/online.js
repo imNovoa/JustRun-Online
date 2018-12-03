@@ -28,6 +28,7 @@ var coinsY = new Array();
 
 var checkCoin = false;
 var checkPlayer2 = false;
+var checkPlayer2C = false;
 
 var spark;
 
@@ -156,7 +157,7 @@ function createBlocks() {
     var pos = 120;
     for (i = 0; i < 8; i++) {
         b = blocks.children[i];  
-        if(i==0){b.reset(475, 80);};
+        //if(i==0){b.reset(475, 80);};
         if(i==1){b.reset(475, 412);};
         if(i==2){b.reset(1043, 687);};
         if(i==3){b.reset(2178, 240);};
@@ -265,6 +266,7 @@ function firing(){
 CatCatcher.onlineState.prototype = {
 
 		init() {
+			//asignamos los id
 			if (game.player1.id == 1) {
 				game.player2 = {id: 2}
 			} else {
@@ -293,16 +295,8 @@ CatCatcher.onlineState.prototype = {
     },
 
     create: function () {
+    	//creamos las monedas haciendo un get para obtener todas las que se han creado en el server
     	
-    	this.getNumCoins(function (numCoins) {
-    		for(var i = 0; i<50; i++){
-    			coinsX[i] = numCoins[i].x;
-    			coinsY[i] = numCoins[i].y;
-    			if(i ==49){
-    				checkCoin = true;
-    			}
-    		}
-    	});
                 //music
 
                 music.stop();
@@ -399,10 +393,11 @@ CatCatcher.onlineState.prototype = {
         	catCatcher2.animations.add('idleleft', [54,53,52,51,50,59,58,57,56,55,65,64,63,62,61,60,69,68,67,66,65,74,73,72,71,70,79,78,77,76,75], 30, true);
         	console.log(JSON.stringify(game.player2))
         	checkPlayer2=true;
+        	checkPlayer2C = true;
         })
         
         
-
+        //obtenemos bola de fuego del jugador 2
         
         this.getBall(function (ball2Data) {
         	game.ball2 = JSON.parse(JSON.stringify(ball2Data));
@@ -589,6 +584,19 @@ box.fixedToCamera = true;
     	
     	// Manda al servidor la posición actualizada de player 1 para que el otro jugador pueda actualizarla.
         this.putPlayer();
+        
+        if(checkPlayer2C == true){
+        	this.getNumCoins(function (numCoins) {
+        		for(var i = 1; i<50; i++){
+        			coinsX[i] = numCoins[i].x;
+        			coinsY[i] = numCoins[i].y;
+        			if(i ==49){
+        				checkCoin = true;
+        			}
+        		}
+        	});
+        	checkPlayer2C = false;
+        }
         
         if(checkCoin == true){
         	createCoins();

@@ -17,15 +17,21 @@ CatCatcher.preloadState.prototype = {
         this.load.image('flag', 'assets/images/flag.png');
         this.load.spritesheet('francesca', 'assets/images/Francesca.png', 61, 85);
         this.load.spritesheet('francesca2', 'assets/images/Francesca2.png', 61, 85);
+        this.load.spritesheet('drake', 'assets/images/Drake.png', 61, 85);
         this.load.spritesheet('stela', 'assets/images/fire.png', 128, 128);
         this.load.spritesheet('stelo', 'assets/images/firo.png', 128, 128);
-        this.load.image('level1', 'assets/images/level1_final.jpg');
+        this.load.image('level1', 'assets/images/level-1.png');
         this.load.spritesheet('coin', 'assets/images/coin.png', 40, 45);
         this.load.spritesheet('spark', 'assets/images/spark.png',180,206);
         this.load.image('title', 'assets/images/title_screen_logo.jpg');
         this.load.image('play', 'assets/images/play.png');
         this.load.image('local', 'assets/images/local.png');
         this.load.image('create', 'assets/images/creategame.png');
+        this.load.image('drakeSeleccion', 'assets/images/Pantalla-Drake.png');
+        this.load.image('francescaSeleccion', 'assets/images/Pantalla-Francesca.png');
+        this.load.image('rArrow', 'assets/images/rightArrow.png');
+        this.load.image('lArrow', 'assets/images/leftArrow.png');
+        this.load.image('ready', 'assets/images/ready.png');
         this.load.image('join', 'assets/images/joingame.png');
 
         this.load.audio('lvl', 'assets/audio/lv.mp3');
