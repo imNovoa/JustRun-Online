@@ -1,7 +1,6 @@
 CatCatcher.onlineState = function(game) {
 
 }
-
 var player;
 var catCatcher2;
 var jumpTimer = 0;
@@ -79,7 +78,7 @@ function p2vsp1() {
 }
 
 function p1vp2() {
-    ball.x = -100;
+	ball.x=-100;
     ball.y = 0;
     ball.visible = false;
 }
@@ -107,7 +106,7 @@ function p1coins() {
 
 for (i = 0; i < 50; i++) {
     c = coins.children[i];
-    if (player.x >= (c.x-61) && player.x <=(c.x + 61)) {
+    if (player.x >= (c.x-61) && player.x <=(c.x + 61) && player.y>= (c.y-85) && player.y <= (c.y+85)) {
         c.kill();
         clink.play();
         }
@@ -120,7 +119,7 @@ function p2coins() {
 
 for (i = 0; i < 50; i++) {
     c = coins.children[i];
-    if (catCatcher2.x >= (c.x-61) && catCatcher2.x <=(c.x + 61)) {
+    if (catCatcher2.x >= (c.x-61) && catCatcher2.x <=(c.x + 61) && catCatcher2.y>= (c.y-85) && catCatcher2.y <= (c.y+85)) {
         c.kill();
         }
         
@@ -153,6 +152,33 @@ function fireball(p) {
     }
 }
 
+
+function fireball2(p) {
+    if (game.time.now > ballTime) {
+        b2 = balls.getFirstExists(false);
+        b2.visible = true;
+        
+
+        if (b2) {
+            if (lastAnimation == 1 || p.facing == 'left') {
+                b2.reset(p.x - 20, p.y + 10);
+                b2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 12, true);
+                b2.animations.play('left');
+                b2.body.velocity.x = -400;   
+            } else {
+                b2.reset(p.x + 20, p.y+10);
+                b2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
+                b2.animations.play('right');
+                b2.body.velocity.x = 400;
+            }
+            b2.body.gravity.y = 0;
+            b2.body.maxVelocity.y = 0;
+        }
+    }
+}
+
+//creacion de cajas misteriosas y monedas
+
 function createBlocks() {
     var pos = 120;
     for (i = 0; i < 8; i++) {
@@ -161,7 +187,7 @@ function createBlocks() {
         if(i==1){b.reset(475, 412);};
         if(i==2){b.reset(1043, 687);};
         if(i==3){b.reset(2178, 240);};
-        if(i==4){b.reset(2178, 99);};
+        if(i==4){b.reset(2478, 99);};
         if(i==5){b.reset(3493, 99);};
         if(i==6){b.reset(3886, 295);};
         if(i==7){b.reset(4955, 115);};
@@ -174,11 +200,32 @@ function createBlocks() {
 
 function createCoins() {
 	
-        //  Now let's add 50 coins into it
-	 for (i = 0; i < 50; i++)
+	 for (i = 0; i < 21; i++)
      {
      	c = coins.children[i]; 
-     	c.reset(coinsX[i] ,coinsY[i]);
+     	if(i==0){c.reset(3, 200);};
+     	if(i==1){c.reset(130, 446);};
+     	if(i==2){c.reset(302, 227);};
+     	if(i==3){c.reset(522, 50);};
+     	if(i==4){c.reset(819, 446);};
+     	if(i==5){c.reset(1104, 687);};
+     	if(i==6){c.reset(764, 612);};
+     	if(i==7){c.reset(1856, 443);};
+     	if(i==8){c.reset(2026, 259);};
+     	if(i==9){c.reset(2411, 259);};
+     	if(i==10){c.reset(1726, 135);};
+     	if(i==11){c.reset(2318, 135);};
+     	if(i==12){c.reset(2821, 135);};
+     	if(i==13){c.reset(3176, 135);};
+     	if(i==14){c.reset(2938, 443);};
+     	if(i==15){c.reset(3587, 339);};
+     	if(i==16){c.reset(4230, 215);};
+     	if(i==17){c.reset(4472, 10);};
+     	if(i==18){c.reset(3885, 647);};
+     	if(i==19){c.reset(5123, 651);};
+     	if(i==20){c.reset(5363, 600);};
+     	
+     	
 
      	c.scale.setTo(.6,.6);
      	c.body.maxVelocity.y = 0;
@@ -186,15 +233,13 @@ function createCoins() {
 
      	c.animations.add('do', [0, 1, 2, 3, 4, 5], 12, true);
      	c.animations.play('do');
-     	if(i == 49){
-     		checkCoin = false;
-     	}
      }
      
     
 
 }
 
+//colisiones de jugadores con cajas misteriosas
 function p1vsblocks() {
     if(canShoot == false){canShoot = true; boxball.visible = true;}
     for (i = 0; i < 10; i++) {
@@ -218,25 +263,6 @@ function p2vsblocks() {
 function slowFalse() {
     player.slow = false;
 }
-
-/*function slowTrue2(){
-    
-    player2.slow = true;
-    
-    
-    for (i = 0; i < fires.length; i++) {
-        f = fires.children[i];
-        if (game.physics.arcade.overlap(player2, f, null, null, this)) {
-            f.kill();
-            c = explos.create(player2.x, player2.y, 'stelo');
-            c.animations.add('ex', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37], 80, true);
-            c.killOnComplete=true;
-            c.play('ex', null, false, true);
-            }
-            
-        }
-    
-}*/
 
 
 function sprintFalse() {
@@ -266,36 +292,17 @@ function firing(){
 CatCatcher.onlineState.prototype = {
 
 		init() {
-			//asignamos los id
-			if (game.player1.id == 1) {
-				game.player2 = {id: 2}
-			} else {
-				game.player2 = {id: 1}
-			}
 			
-			if(game.ball1.id == 3){
-				game.ball2 = {id:4}
-			}else{
-				game.ball2 = {id:3}
-			}
-			if(game.c.id == 5){
-				game.c2 = {id:5}
-			}else{
-				game.c2 = {id:6}
-			}
 			
 			
 		},
 		
     preload: function () {
-    	console.log(JSON.stringify(game.player1));
-    	console.log(JSON.stringify(game.ball1));
     	
    
     },
 
     create: function () {
-    	//creamos las monedas haciendo un get para obtener todas las que se han creado en el server
     	
                 //music
 
@@ -332,7 +339,7 @@ CatCatcher.onlineState.prototype = {
 
         game.physics.arcade.gravity.y = 100;
 
-        //Bolas de fuego del jugador 1
+        //Bolas de fuego
         balls = game.add.group();
         balls.enableBody = true;
         balls.physicsBodyType = Phaser.Physics.ARCADE;
@@ -346,13 +353,12 @@ CatCatcher.onlineState.prototype = {
         ball.body.maxVelocity.y = 0;
         ball.visible = false;
         
-        //Bolas de fuego del jugador 2
-        balls2 = game.add.group();
-        balls2.enableBody = true;
-        balls2.physicsBodyType = Phaser.Physics.ARCADE;
-        balls2.createMultiple(30, 'fireball');
-        balls2.setAll('outOfBoundsKill', true);
-        balls2.setAll('checkWorldBounds', true);
+        b2 = game.add.sprite(0, 0, 'fireball');
+        game.physics.enable(b2, Phaser.Physics.ARCADE);
+        b2.body.gravity.y = 0;
+        b2.body.maxVelocity.y = 0;
+        b2.visible = false;
+        
 
 
         //JUGADOR 1
@@ -373,46 +379,29 @@ CatCatcher.onlineState.prototype = {
         player.animations.add('left', [84, 83, 82,81,80,89,88,87,86,85,94,93,92,91,90,99,98,97,96,95], 20, true);
         player.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
         player.animations.add('idleleft', [54,53,52,51,50,59,58,57,56,55,65,64,63,62,61,60,69,68,67,66,65,74,73,72,71,70,79,78,77,76,75], 30, true);
+        
+        
+        //Obtenemos la info del jugador 2 y creamos su sprite
+        var p2data = {
+    			"type": "getPlayer2",
+    			"id": onlineP1.id
+    	}
+    	ws.send(JSON.stringify(p2data));
 
         
-        // Obtenemos la posición del jugador 2 y lo pintamos. No nos importa la física, ya que será
-        // el otro jugador en su propia pantalla el que gestione dicho dato. Sólo necesitamos pintarlo
-        // para verlo. Utilizamos un callback (player2Data) para que UNA VEZ tengamos la posición
-        // del player 2, la pintemos en escenario y así evitar un undefined.
-        this.getPlayer(function (player2Data) {
-        	game.player2 = JSON.parse(JSON.stringify(player2Data));
-        	if(game.player2.skin == 0){
-        	catCatcher2 = game.add.sprite(game.player2.x, game.player2.y, 'francesca');
+
+        	if(onlineP2.skin == 0){
+        	catCatcher2 = game.add.sprite(onlineP2.x, onlineP2.y, 'francesca');
         	}else{
-        	catCatcher2 = game.add.sprite(game.player2.x, game.player2.y, 'drake');
+        	catCatcher2 = game.add.sprite(onlineP2.x, onlineP2.y, 'drake');
         	}
         	game.physics.enable(catCatcher2, Phaser.Physics.ARCADE);
         	catCatcher2.animations.add('right', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49], 20, true);
         	catCatcher2.animations.add('left', [84, 83, 82,81,80,89,88,87,86,85,94,93,92,91,90,99,98,97,96,95], 20, true);
         	catCatcher2.animations.add('idleright', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 30, true);
         	catCatcher2.animations.add('idleleft', [54,53,52,51,50,59,58,57,56,55,65,64,63,62,61,60,69,68,67,66,65,74,73,72,71,70,79,78,77,76,75], 30, true);
-        	console.log(JSON.stringify(game.player2))
-        	checkPlayer2=true;
-        	checkPlayer2C = true;
-        })
         
-        
-        //obtenemos bola de fuego del jugador 2
-        
-        this.getBall(function (ball2Data) {
-        	game.ball2 = JSON.parse(JSON.stringify(ball2Data));
-            b2 = game.add.sprite(game.ball2.x, game.ball2.y, 'fireball');
-        	game.physics.enable(b2, Phaser.Physics.ARCADE);
-        	b2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 12, true);
-        	b2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 12, true);
-        	b2.body.gravity.y = 0;
-        	b2.body.maxVelocity.y = 0;
-        	b2.visible = false;
-        	console.log(JSON.stringify(game.ball2))
-        })
-        
-        
-        
+        //Creamos bloques y monedas
 
         blocks = game.add.group();
         blocks.enableBody = true;
@@ -428,15 +417,8 @@ CatCatcher.onlineState.prototype = {
         coins.physicsBodyType = Phaser.Physics.ARCADE;
         coins.createMultiple(50, 'coin');
         
-        coins2 = game.add.group();
-        coins2.enableBody = true;
-        coins2.physicsBodyType = Phaser.Physics.ARCADE;
-        coins2.createMultiple(50, 'coin');
+        createCoins();
         
-       
-
-    
-
 
 
         //fxs
@@ -582,66 +564,49 @@ box.fixedToCamera = true;
 
     update: function () {
     	
-    	// Manda al servidor la posición actualizada de player 1 para que el otro jugador pueda actualizarla.
-        this.putPlayer();
-        
-        if(checkPlayer2C == true){
-        	this.getNumCoins(function (numCoins) {
-        		for(var i = 1; i<50; i++){
-        			coinsX[i] = numCoins[i].x;
-        			coinsY[i] = numCoins[i].y;
-        			if(i ==49){
-        				checkCoin = true;
-        			}
-        		}
-        	});
-        	checkPlayer2C = false;
-        }
-        
-        if(checkCoin == true){
-        	createCoins();
-        }
-        
-        if(ballExists){this.putBall(); game.ball1.visibility = true;};
-        
+    	//subimos al servidor la info de nuestro jugador
+    	onlineP1.x = player.x;
+    	onlineP1.y = player.y;
     	
-    	// Obtiene mediante GET la posición de player 2. Usa un callback para que UNA VEZ tenga su posición,
-        // pinte su ubicación.
-        this.getPlayer( function (updatePlayer2) {
-        	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
-        	if(catCatcher2.x<game.player2.x){
-        		catCatcher2.animations.play('right');
-        		lastAnimation = 0;
-        	}else if(catCatcher2.x>game.player2.x){
-        		catCatcher2.animations.play('left');
-        		lastAnimation = 1;
-        	}else if(lastAnimation>0){
-        		catCatcher2.animations.play('idleleft');
-        	}else{
-        		catCatcher2.animations.play('idleright');
-        	}
-        	catCatcher2.x = game.player2.x;
-        	catCatcher2.y = game.player2.y;        	
-        	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
-        })
-        
-        
-        
-        this.getBall( function (updateBall2) {
-        	game.ball2 = JSON.parse(JSON.stringify(updateBall2));
-        	if(game.ball2.visibility == true){
-        		b2.visible = true;
-        	}
-        	if(b2.x<game.ball2.x){
-        		b2.animations.play('right');
-        	}else if(b2.x>game.ball2.x){
-        		b2.animations.play('left');
-        	}
-        	b2.x = game.ball2.x;
-        	b2.y = game.ball2.y;        	
-        })
-        
-        
+    	var data = {
+    			"type": "updatePlayer",
+    			"id" : onlineP1.id,
+    			"x" : onlineP1.x,
+    			"y" : onlineP1.y,
+    			"skin" : onlineP1.skin,
+    			"rightDown" : onlineP1.rightDown,
+    			"leftDown" : onlineP1.leftDown,
+    			"joined" : onlineP1.joined,
+    			"spaceDown" : onlineP1.spaceDown,
+    			"isWinner" : onlineP1.isWinner
+    	}
+    	
+    	ws.send(JSON.stringify(data));
+    	
+    	//recogemos la info del jugador 2 y actualizamos el sprite
+    	var p2data = {
+    			"type": "getPlayer2",
+    			"id": onlineP1.id
+    	}
+    	ws.send(JSON.stringify(p2data));
+    	
+    	catCatcher2.x = onlineP2.x;
+    	catCatcher2.y = onlineP2.y;
+    	
+    	
+    	//Gestion de animaciones del jugador 2
+    	if(onlineP2.rightDown == true && onlineP2.leftDown == false){
+    		catCatcher2.animations.play('right');
+    		lastAnimation = 0;
+    	}else if(onlineP2.leftDown == true && onlineP2.rightDown == false){
+    		catCatcher2.animations.play('left');
+    		lastAnimation = 1;
+    	}else if (onlineP2.rightDown == false && onlineP2.leftDown == false && lastAnimation == 0){
+    		catCatcher2.animations.play('idleright');
+    	}else{
+    		catCatcher2.animations.play('idleleft');
+    	}
+
 
         //Activamos colisiones de los jugadores con el mundo
         game.physics.arcade.collide(player, layer);
@@ -668,7 +633,8 @@ box.fixedToCamera = true;
         
         if (cursors.left.isDown) {
             player.body.setSize(50, 85);
-
+            onlineP1.rightDown = false;
+            onlineP1.leftDown = true;
 
 
             if (player.sprint==true) {
@@ -698,6 +664,8 @@ box.fixedToCamera = true;
             }
         }
         else if (cursors.right.isDown) {
+        	onlineP1.rightDown = true;
+        	onlineP1.leftDown = false;
             player.body.setSize(30, 85, 26);
             shootLeft = false;
             if (player.sprint == true) {
@@ -719,6 +687,8 @@ box.fixedToCamera = true;
             }
         }
         else {
+        	onlineP1.rightDown = false;
+        	onlineP1.leftDown = false;
             if (player.facing != 'idle') {
                 player.body.setSize(30, 85, 26);
 
@@ -751,10 +721,17 @@ box.fixedToCamera = true;
 
         //Controles de bola de fuego para cada jugador
         if (ballButton.isDown && canShoot == true) {
+        	onlineP1.spaceDown = true;
             fireball(player);
             canShoot = false;
             boxball.visible = false;
             ballExists = true;
+        }else{
+        	onlineP1.spaceDown = false;
+        }
+        
+        if(onlineP2.spaceDown == true){
+        	fireball2(catCatcher2);
         }
 
 
@@ -792,12 +769,10 @@ box.fixedToCamera = true;
 
        game.physics.arcade.collide(ball, b2, ballvsball, null, this);
 
-        game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
+       game.physics.arcade.collide(blocks, player, p1vsblocks, null, this);
 
-        if(checkPlayer2 == true){
-        	game.physics.arcade.collide(blocks, catCatcher2, p2vsblocks, null, this);
-        	game.physics.arcade.collide(catCatcher2, ball, p1vp2, null, this);
-        }
+       game.physics.arcade.collide(blocks, catCatcher2, p2vsblocks, null, this);
+       game.physics.arcade.collide(catCatcher2, ball, p1vp2, null, this);
 
         //colisión monedas
 
@@ -811,9 +786,16 @@ box.fixedToCamera = true;
 
 
         cursors.up.onDown.add(jump);
-
-        if (player.x == 5856) {
-            winner = 'jugador 1';
+        
+        
+        //Gestion de final de partida y ganador
+        if (player.x == 5856 ) {
+        	onlineP1.isWinner = true;
+            this.state.start('ending');
+        }
+        
+        if (catCatcher2.x == 5856 ) {
+        	onlineP2.isWinner = true;
             this.state.start('ending');
         }
 
@@ -821,109 +803,7 @@ box.fixedToCamera = true;
 
         pin.width= (player.x*1.9*3);
 
-},
-
-//Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2)
-getPlayer(callback) {
-    $.ajax({
-        method: "GET",
-        url: window.location.href + '/game/' + game.player2.id,
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        game.player2 = JSON.parse(JSON.stringify(data));
-        callback(data);
-    })
-},
-
-// Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
-putPlayer() {
-	game.player1.x = player.x;
-	game.player1.y = player.y;
-    $.ajax({
-        method: "PUT",
-        url: window.location.href + '/game/' + game.player1.id,
-        data: JSON.stringify(game.player1),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-    	//console.log("Actualizada posicion de player 1: " + JSON.stringify(data))
-    })
-},
-
-putCoin() {
-	
-    $.ajax({
-        method: "PUT",
-        url: window.location.href + '/coin/' + game.c.id,
-        data: JSON.stringify(game.c),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-    })
-},
-
-getBall(callback) {
-    $.ajax({
-        method: "GET",
-        url: window.location.href + '/ball/' + game.ball2.id,
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        game.ball2 = JSON.parse(JSON.stringify(data));
-        callback(data);
-    })
-},
-
-getCoins(callback) {
-    $.ajax({
-        method: "GET",
-        url: window.location.href + '/coin/' + game.c2.id,
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        game.c2 = JSON.parse(JSON.stringify(data));
-        callback(data);
-    })
-},
-
-
-
-//Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
-putBall() {
-	game.ball1.x = ball.x;
-	game.ball1.y = ball.y;
-    $.ajax({
-        method: "PUT",
-        url: window.location.href + '/ball/' + game.ball1.id,
-        data: JSON.stringify(game.ball1),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-    	//console.log("Actualizada posicion de ball 1: " + JSON.stringify(data))
-    })
-},
-
-getNumCoins: function (callback) {
-    $.ajax({
-        url: window.location.href + '/coin',
-    }).done(function (data) {
-        callback(data);
-    })
 }
-
 
 
 
