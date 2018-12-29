@@ -16,7 +16,7 @@ debug = {
 }
 
 //La URL a la cual se conecta, debe ser la URL con la cual el servidor WebSocket debe responder.
-var ws = new WebSocket('ws://' + window.location.href '/gameplayer')
+var ws = new WebSocket('ws://192.168.1.44:8080/gameplayer')
 
 //Un monitor de eventos que es llamado cuando el estado readyState de la conexión Websocket cambia a OPEN. Esto indica que la conexión está lista para enviar y recibir datos. El evento es uno simple con el nombre "open".
 ws.onopen = function (event) {
