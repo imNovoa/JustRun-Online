@@ -8,6 +8,9 @@ public class Player {
 	private int skin;
 	private boolean rightDown = false; 
 	private boolean leftDown = false;
+	private boolean joined = false;
+	private boolean spaceDown = false;
+	private boolean isWinner = false;
 	
 	
 	Player() {
@@ -77,10 +80,34 @@ public class Player {
 	public boolean getLeft() {
 		return leftDown;
 	}
+	
+	public boolean getJoined() {
+		return joined;
+	}
+	
+	public void setJoined(boolean j) {
+		joined = j;
+	}
+	
+	public boolean getSpace() {
+		return spaceDown;
+	}
+	
+	public void setSpace(boolean s) {
+		spaceDown = s;
+	}
+	
+	public boolean getWinner() {
+		return isWinner;
+	}
+	
+	public void setWinner(boolean w) {
+		isWinner = w;
+	}
 
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", x=" + x + ", y=" + y + ", score=" + score + "]";
+		return "Player [id=" + id + ", x=" + x + ", y=" + y + ", score=" + score + ", rightPulsado=" + rightDown + ", leftDown="+ leftDown +", joined=" + joined + ", spaceDown=" + spaceDown + ", isWinner=" + isWinner + "  ]";
 	}
 
 }

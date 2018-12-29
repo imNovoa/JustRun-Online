@@ -44,11 +44,14 @@ public class GameController {
 		Player player = new Player();
 		long id = nextId.incrementAndGet();
 		player.setId(id);
-		player.setX(rnd.nextInt(700));
-		player.setY(rnd.nextInt(500));
+		player.setX(0);
+		player.setY(447);
 		player.setRight(false);
 		player.setLeft(false);
 		player.setSkin(0);
+		player.setJoined(false);
+		player.setSpace(false);
+		player.setWinner(false);
 		players.put(player.getId(), player);
 		return player;
 	}
@@ -56,13 +59,9 @@ public class GameController {
 	// Con este GET, podemos recuperar la información particular de cada uno de los
 	// jugadores
 	@GetMapping(value = "/game/{id}")
-	public ResponseEntity<Player> getPlayer(@PathVariable long id) {
+	public Player getPlayer(@PathVariable long id) {
 		Player player = players.get(id);
-		if (player != null) {
-			return new ResponseEntity<>(player, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		return player;
 	}
 
 	// Con este PUT actualizamos la información del jugador con ID = id
